@@ -5,17 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ARDAF STORE</title>
   <style>
-    /* --- CSS RESET & VARIABLE TEMA LILAC --- */
+    /* --- VARIABLE TEMA WHATSAPP WEB --- */
     :root {
-      --primary: #8b5cf6;        /* Primary Lilac Vibrant */
-      --primary-light: #f3e8ff;  /* Soft Lilac Background */
-      --primary-dark: #6d28d9;   /* Deep Lilac */
-      --accent: #c084fc;         /* Accent Lilac */
-      --bg-body: #faf5ff;        /* Very Soft Lilac Tint */
-      --card-bg: #ffffff;
-      --text-main: #334155;
-      --text-muted: #64748b;
-      --border-color: #e9d5ff;
+      --wa-header-bg: #00a884;       /* Hijau khas WhatsApp Web */
+      --wa-primary: #00a884;        
+      --wa-primary-hover: #008f6f;  
+      --wa-bg-body: #111b21;         /* Gelap khas latar WA Web */
+      --wa-card-bg: #202c33;        /* Gelap panel WA Web */
+      --wa-sidebar-bg: #111b21;     
+      --wa-text-main: #e9edef;       /* Teks terang */
+      --wa-text-muted: #8696a0;      /* Teks samar */
+      --wa-border: #222d34;          /* Garis pembatas tipis */
+      --wa-input-bg: #2a3942;        /* Latar field input WA */
       --sidebar-width: 240px;
     }
 
@@ -23,12 +24,12 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
 
     body {
-      background-color: var(--bg-body);
-      color: var(--text-main);
+      background-color: var(--wa-bg-body);
+      color: var(--wa-text-main);
       display: flex;
       flex-direction: column;
       min-height: 100vh;
@@ -36,16 +37,16 @@
 
     /* --- HEADER --- */
     header {
-      background: linear-gradient(135deg, var(--primary), var(--accent));
-      color: white;
-      padding: 18px 24px;
-      font-size: 1.5rem;
-      font-weight: bold;
-      letter-spacing: 1px;
-      box-shadow: 0 4px 12px rgba(139, 92, 246, 0.15);
+      background-color: var(--wa-header-bg);
+      color: #ffffff;
+      padding: 16px 24px;
+      font-size: 1.3rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
       display: flex;
       align-items: center;
       gap: 12px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
 
     /* --- LAYOUT UTAMA --- */
@@ -57,45 +58,46 @@
     /* --- SIDEBAR MENU --- */
     .sidebar {
       width: var(--sidebar-width);
-      background-color: var(--card-bg);
-      border-right: 1px solid var(--border-color);
+      background-color: var(--wa-sidebar-bg);
+      border-right: 1px solid var(--wa-border);
       display: flex;
       flex-direction: column;
-      gap: 8px;
-      padding: 20px 12px;
+      gap: 6px;
+      padding: 16px 10px;
     }
 
     .tab-btn {
       background: transparent;
       border: none;
-      padding: 14px 18px;
+      padding: 12px 16px;
       text-align: left;
       font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      border-radius: 10px;
+      font-weight: 500;
+      color: var(--wa-text-muted);
+      border-radius: 8px;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: all 0.2s ease;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
     }
 
     .tab-btn:hover {
-      background-color: var(--primary-light);
-      color: var(--primary-dark);
+      background-color: rgba(255, 255, 255, 0.05);
+      color: var(--wa-text-main);
     }
 
     .tab-btn.active {
-      background-color: var(--primary);
-      color: white;
-      box-shadow: 0 4px 10px rgba(139, 92, 246, 0.3);
+      background-color: var(--wa-primary);
+      color: #ffffff;
+      font-weight: 600;
     }
 
     /* --- CONTENT AREA --- */
     .content {
       flex: 1;
-      padding: 28px;
+      padding: 24px;
+      background-color: var(--wa-bg-body);
     }
 
     .tab-panel {
@@ -104,29 +106,29 @@
 
     .tab-panel.active {
       display: block;
-      animation: fadeIn 0.3s ease-in-out;
+      animation: fadeIn 0.25s ease-in-out;
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
+      from { opacity: 0; transform: translateY(4px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* --- FORM & CARDS (MENU ORDER) --- */
+    /* --- FORM & CARDS --- */
     .card {
-      background-color: var(--card-bg);
-      border-radius: 14px;
+      background-color: var(--wa-card-bg);
+      border-radius: 12px;
       padding: 24px;
-      box-shadow: 0 4px 20px rgba(139, 92, 246, 0.06);
-      border: 1px solid var(--border-color);
+      border: 1px solid var(--wa-border);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
       margin-bottom: 20px;
     }
 
     .card-title {
-      font-size: 1.2rem;
-      color: var(--primary-dark);
+      font-size: 1.15rem;
+      color: var(--wa-primary);
       margin-bottom: 20px;
-      font-weight: 700;
+      font-weight: 600;
     }
 
     .order-grid {
@@ -144,33 +146,34 @@
 
     label {
       font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--text-muted);
+      font-weight: 500;
+      color: var(--wa-text-muted);
       text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     input, select {
       width: 100%;
       padding: 12px 14px;
-      border: 1px solid var(--border-color);
+      border: 1px solid var(--wa-border);
       border-radius: 8px;
       outline: none;
       font-size: 0.95rem;
-      transition: border 0.2s;
-      background-color: #faf5ff;
+      transition: border 0.2s, background-color 0.2s;
+      background-color: var(--wa-input-bg);
+      color: var(--wa-text-main);
     }
 
     input:focus, select:focus {
-      border-color: var(--primary);
-      background-color: #fff;
-      box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+      border-color: var(--wa-primary);
+      box-shadow: 0 0 0 2px rgba(0, 168, 132, 0.2);
     }
 
     /* AI Photo Area */
     .ai-scan-box {
-      border: 2px dashed var(--accent);
-      background-color: var(--primary-light);
-      border-radius: 12px;
+      border: 2px dashed #3b4a54;
+      background-color: rgba(42, 57, 66, 0.5);
+      border-radius: 10px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -178,33 +181,33 @@
       padding: 20px;
       text-align: center;
       cursor: pointer;
-      min-height: 180px;
-      transition: background 0.3s;
+      min-height: 170px;
+      transition: background-color 0.2s, border-color 0.2s;
     }
 
     .ai-scan-box:hover {
-      background-color: #ebd5ff;
+      background-color: var(--wa-input-bg);
+      border-color: var(--wa-primary);
     }
 
     .btn-buy {
       width: 100%;
       padding: 14px;
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      background-color: var(--wa-primary);
       color: white;
       border: none;
       border-radius: 8px;
       font-size: 1rem;
-      font-weight: bold;
+      font-weight: 600;
       cursor: pointer;
-      transition: transform 0.1s, box-shadow 0.2s;
+      transition: background-color 0.2s;
     }
 
     .btn-buy:hover {
-      box-shadow: 0 6px 16px rgba(139, 92, 246, 0.35);
-      transform: translateY(-1px);
+      background-color: var(--wa-primary-hover);
     }
 
-    /* --- TABLES (MENU LAPORAN & PAKET) --- */
+    /* --- TABLES (PAKET & LAPORAN) --- */
     .table-container {
       overflow-x: auto;
     }
@@ -212,53 +215,57 @@
     table {
       width: 100%;
       border-collapse: collapse;
-      background: white;
-      border-radius: 10px;
+      background-color: var(--wa-card-bg);
+      border-radius: 8px;
       overflow: hidden;
     }
 
     th, td {
       padding: 14px 16px;
       text-align: left;
-      border-bottom: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--wa-border);
       font-size: 0.9rem;
+      color: var(--wa-text-main);
     }
 
     th {
-      background-color: var(--primary-light);
-      color: var(--primary-dark);
-      font-weight: 700;
+      background-color: #182229;
+      color: var(--wa-text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 0.5px;
     }
 
     tr:hover {
-      background-color: #fdf8ff;
+      background-color: rgba(255, 255, 255, 0.02);
     }
 
     .badge {
       padding: 4px 10px;
-      border-radius: 20px;
+      border-radius: 12px;
       font-size: 0.75rem;
       font-weight: 600;
     }
 
-    .badge-success { background: #dcfce7; color: #15803d; }
-    .badge-pending { background: #fef9c3; color: #a16207; }
+    .badge-success { background: rgba(0, 168, 132, 0.2); color: #00a884; }
+    .badge-pending { background: rgba(234, 179, 8, 0.2); color: #eab308; }
 
     .admin-unlock-btn {
-      background-color: var(--primary-light);
-      color: var(--primary-dark);
-      border: 1px solid var(--accent);
-      padding: 8px 14px;
-      border-radius: 6px;
+      background-color: var(--wa-input-bg);
+      color: var(--wa-text-main);
+      border: 1px solid var(--wa-border);
+      padding: 10px 16px;
+      border-radius: 8px;
       font-size: 0.85rem;
-      font-weight: 600;
+      font-weight: 500;
       cursor: pointer;
       margin-bottom: 16px;
+      transition: background-color 0.2s;
     }
 
     .admin-unlock-btn:hover {
-      background-color: var(--accent);
-      color: white;
+      background-color: #3b4a54;
     }
 
     /* Kolom Tagih (Secured) */
@@ -271,13 +278,18 @@
     }
 
     .btn-tagih {
-      background-color: #ef4444;
+      background-color: #f15c6d;
       color: white;
       border: none;
       padding: 6px 12px;
       border-radius: 6px;
       cursor: pointer;
       font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .btn-tagih:hover {
+      background-color: #d94354;
     }
 
     /* --- RESPONSIVE LAYOUT --- */
@@ -290,7 +302,7 @@
         width: 100%;
         flex-direction: row;
         border-right: none;
-        border-bottom: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--wa-border);
         padding: 8px;
       }
 
@@ -313,17 +325,17 @@
 </head>
 <body>
 
-  <!-- HEADER -->
+  <!-- HEADER WA WEB STYLE -->
   <header>
-    🛍️ ARDAF STORE
+    💬 ARDAF STORE
   </header>
 
   <div class="app-container">
     <!-- SIDEBAR TAB NAVIGATION -->
     <aside class="sidebar">
       <button class="tab-btn active" onclick="switchTab('order', this)">🛒 ORDER</button>
-      <button class="tab-btn" onclick="switchTab('laporan', this)">📋 LAPORAN</button>
       <button class="tab-btn" onclick="switchTab('paket', this)">📦 PAKET</button>
+      <button class="tab-btn" onclick="switchTab('laporan', this)">📋 LAPORAN</button>
     </aside>
 
     <!-- MAIN CONTENT -->
@@ -357,8 +369,8 @@
                 <label>Scan Nomor HP (AI Foto)</label>
                 <div class="ai-scan-box" onclick="triggerAIScan()">
                   <span style="font-size: 2rem;">📷</span>
-                  <span style="margin-top: 8px; font-weight: 600; color: var(--primary-dark);">Upload / Ambil Foto</span>
-                  <small style="color: var(--text-muted); font-size: 0.75rem;">AI akan otomatis membaca nomor HP dari gambar</small>
+                  <span style="margin-top: 8px; font-weight: 500; color: var(--wa-text-main);">Upload / Ambil Foto</span>
+                  <small style="color: var(--wa-text-muted); font-size: 0.75rem; margin-top: 4px;">AI akan otomatis membaca nomor HP dari gambar</small>
                 </div>
                 <input type="file" id="ai-file-input" accept="image/*" style="display:none" onchange="processAIPhoto()">
               </div>
@@ -369,7 +381,42 @@
         </div>
       </section>
 
-      <!-- MENU 2: LAPORAN -->
+      <!-- MENU 2: PAKET -->
+      <section id="tab-paket" class="tab-panel">
+        <div class="card">
+          <div class="card-title">Daftar Paket Tersedia</div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>KODE PAKET</th>
+                  <th>HARGA</th>
+                  <th>MASA AKTIF</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>PKT01</b></td>
+                  <td>Rp 25.000</td>
+                  <td>7 Hari</td>
+                </tr>
+                <tr>
+                  <td><b>PKT02</b></td>
+                  <td>Rp 50.000</td>
+                  <td>30 Hari</td>
+                </tr>
+                <tr>
+                  <td><b>PKT03</b></td>
+                  <td>Rp 90.000</td>
+                  <td>30 Hari</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- MENU 3: LAPORAN -->
       <section id="tab-laporan" class="tab-panel">
         <div class="card">
           <div class="card-title">Laporan Transaksi</div>
@@ -402,41 +449,6 @@
                   <td>PKT01 - 10GB</td>
                   <td><span class="badge badge-pending">Belum Bayar</span></td>
                   <td class="col-tagih"><button class="btn-tagih" onclick="alert('Tagihan dikirim ke Siti')">TAGIH</button></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      <!-- MENU 3: PAKET -->
-      <section id="tab-paket" class="tab-panel">
-        <div class="card">
-          <div class="card-title">Daftar Paket Tersedia</div>
-          <div class="table-container">
-            <table>
-              <thead>
-                <tr>
-                  <th>KODE PAKET</th>
-                  <th>HARGA</th>
-                  <th>MASA AKTIF</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><b>PKT01</b></td>
-                  <td>Rp 25.000</td>
-                  <td>7 Hari</td>
-                </tr>
-                <tr>
-                  <td><b>PKT02</b></td>
-                  <td>Rp 50.000</td>
-                  <td>30 Hari</td>
-                </tr>
-                <tr>
-                  <td><b>PKT03</b></td>
-                  <td>Rp 90.000</td>
-                  <td>30 Hari</td>
                 </tr>
               </tbody>
             </table>
@@ -482,7 +494,7 @@
     // Lock/Unlock Admin Column (PIN Tagih)
     function unlockAdmin() {
       const pin = prompt("Masukkan PIN/Password Admin:");
-      if (pin === "1234") { // Gantilah "1234" dengan PIN pilihan Anda
+      if (pin === "1234") { // Default PIN
         const tagihColumns = document.querySelectorAll('.col-tagih');
         tagihColumns.forEach(col => col.classList.add('show'));
         alert("Akses Admin Diberikan. Kolom TAGIH ditampilkan.");
