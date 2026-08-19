@@ -3,20 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ARDAF STORE</title>
+  <title>ARDAF STORE // TERMINAL v1.0</title>
   <style>
-    /* --- VARIABLE TEMA WHATSAPP WEB --- */
+    /* --- VARIABLE TEMA HACKER / TERMINAL --- */
     :root {
-      --wa-header-bg: #00a884;       /* Hijau khas WhatsApp Web */
-      --wa-primary: #00a884;        
-      --wa-primary-hover: #008f6f;  
-      --wa-bg-body: #111b21;         /* Gelap khas latar WA Web */
-      --wa-card-bg: #202c33;        /* Gelap panel WA Web */
-      --wa-sidebar-bg: #111b21;     
-      --wa-text-main: #e9edef;       /* Teks terang */
-      --wa-text-muted: #8696a0;      /* Teks samar */
-      --wa-border: #222d34;          /* Garis pembatas tipis */
-      --wa-input-bg: #2a3942;        /* Latar field input WA */
+      --hacker-bg: #0a0a0a;          /* Black Matrix */
+      --hacker-card-bg: #111411;     /* Dark Gray Green */
+      --hacker-green: #00ff66;       /* Neon Green */
+      --hacker-green-dark: #008033;  
+      --hacker-text: #00ff66;        
+      --hacker-text-muted: #00a340;   
+      --hacker-border: #00ff66;      
+      --hacker-input-bg: #050d08;    
+      --hacker-red: #ff0055;         /* Red Cyber */
       --sidebar-width: 240px;
     }
 
@@ -24,12 +23,12 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: 'Courier New', Courier, monospace, sans-serif;
     }
 
     body {
-      background-color: var(--wa-bg-body);
-      color: var(--wa-text-main);
+      background-color: var(--hacker-bg);
+      color: var(--hacker-text);
       display: flex;
       flex-direction: column;
       min-height: 100vh;
@@ -37,16 +36,17 @@
 
     /* --- HEADER --- */
     header {
-      background-color: var(--wa-header-bg);
-      color: #ffffff;
+      background-color: #000000;
+      color: var(--hacker-green);
       padding: 16px 24px;
       font-size: 1.3rem;
-      font-weight: 600;
-      letter-spacing: 0.5px;
+      font-weight: bold;
+      letter-spacing: 2px;
       display: flex;
       align-items: center;
       gap: 12px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      border-bottom: 2px solid var(--hacker-green);
+      text-shadow: 0 0 8px rgba(0, 255, 102, 0.6);
     }
 
     /* --- LAYOUT UTAMA --- */
@@ -58,46 +58,50 @@
     /* --- SIDEBAR MENU --- */
     .sidebar {
       width: var(--sidebar-width);
-      background-color: var(--wa-sidebar-bg);
-      border-right: 1px solid var(--wa-border);
+      background-color: #050505;
+      border-right: 1px solid var(--hacker-green-dark);
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 8px;
       padding: 16px 10px;
     }
 
     .tab-btn {
       background: transparent;
-      border: none;
+      border: 1px solid var(--hacker-green-dark);
       padding: 12px 16px;
       text-align: left;
-      font-size: 0.95rem;
-      font-weight: 500;
-      color: var(--wa-text-muted);
-      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: bold;
+      color: var(--hacker-text-muted);
+      border-radius: 4px;
       cursor: pointer;
       transition: all 0.2s ease;
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
     .tab-btn:hover {
-      background-color: rgba(255, 255, 255, 0.05);
-      color: var(--wa-text-main);
+      background-color: rgba(0, 255, 102, 0.1);
+      color: var(--hacker-green);
+      border-color: var(--hacker-green);
+      box-shadow: 0 0 8px rgba(0, 255, 102, 0.3);
     }
 
     .tab-btn.active {
-      background-color: var(--wa-primary);
-      color: #ffffff;
-      font-weight: 600;
+      background-color: var(--hacker-green);
+      color: #000000;
+      font-weight: bold;
+      box-shadow: 0 0 12px rgba(0, 255, 102, 0.8);
+      border-color: var(--hacker-green);
     }
 
     /* --- CONTENT AREA --- */
     .content {
       flex: 1;
       padding: 24px;
-      background-color: var(--wa-bg-body);
+      background-color: var(--hacker-bg);
     }
 
     .tab-panel {
@@ -106,29 +110,32 @@
 
     .tab-panel.active {
       display: block;
-      animation: fadeIn 0.25s ease-in-out;
+      animation: glitch 0.2s ease-in-out;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(4px); }
-      to { opacity: 1; transform: translateY(0); }
+    @keyframes glitch {
+      0% { opacity: 0; transform: translateX(-5px); }
+      50% { opacity: 0.8; transform: translateX(5px); }
+      100% { opacity: 1; transform: translateX(0); }
     }
 
     /* --- FORM & CARDS --- */
     .card {
-      background-color: var(--wa-card-bg);
-      border-radius: 12px;
+      background-color: var(--hacker-card-bg);
+      border-radius: 4px;
       padding: 24px;
-      border: 1px solid var(--wa-border);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      border: 1px solid var(--hacker-green-dark);
+      box-shadow: 0 0 10px rgba(0, 255, 102, 0.1);
       margin-bottom: 20px;
     }
 
     .card-title {
-      font-size: 1.15rem;
-      color: var(--wa-primary);
+      font-size: 1.1rem;
+      color: var(--hacker-green);
       margin-bottom: 20px;
-      font-weight: 600;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-shadow: 0 0 5px rgba(0, 255, 102, 0.5);
     }
 
     .order-grid {
@@ -145,35 +152,35 @@
     }
 
     label {
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: var(--wa-text-muted);
+      font-size: 0.8rem;
+      font-weight: bold;
+      color: var(--hacker-text-muted);
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 1px;
     }
 
     input, select {
       width: 100%;
       padding: 12px 14px;
-      border: 1px solid var(--wa-border);
-      border-radius: 8px;
+      border: 1px solid var(--hacker-green-dark);
+      border-radius: 4px;
       outline: none;
       font-size: 0.95rem;
-      transition: border 0.2s, background-color 0.2s;
-      background-color: var(--wa-input-bg);
-      color: var(--wa-text-main);
+      transition: all 0.2s;
+      background-color: var(--hacker-input-bg);
+      color: var(--hacker-green);
     }
 
     input:focus, select:focus {
-      border-color: var(--wa-primary);
-      box-shadow: 0 0 0 2px rgba(0, 168, 132, 0.2);
+      border-color: var(--hacker-green);
+      box-shadow: 0 0 10px rgba(0, 255, 102, 0.5);
     }
 
     /* AI Photo Area */
     .ai-scan-box {
-      border: 2px dashed #3b4a54;
-      background-color: rgba(42, 57, 66, 0.5);
-      border-radius: 10px;
+      border: 2px dashed var(--hacker-green-dark);
+      background-color: rgba(0, 255, 102, 0.02);
+      border-radius: 4px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -182,29 +189,33 @@
       text-align: center;
       cursor: pointer;
       min-height: 170px;
-      transition: background-color 0.2s, border-color 0.2s;
+      transition: all 0.2s;
     }
 
     .ai-scan-box:hover {
-      background-color: var(--wa-input-bg);
-      border-color: var(--wa-primary);
+      background-color: rgba(0, 255, 102, 0.08);
+      border-color: var(--hacker-green);
+      box-shadow: 0 0 10px rgba(0, 255, 102, 0.2);
     }
 
     .btn-buy {
       width: 100%;
       padding: 14px;
-      background-color: var(--wa-primary);
-      color: white;
-      border: none;
-      border-radius: 8px;
+      background-color: transparent;
+      color: var(--hacker-green);
+      border: 1px solid var(--hacker-green);
+      border-radius: 4px;
       font-size: 1rem;
-      font-weight: 600;
+      font-weight: bold;
+      letter-spacing: 2px;
       cursor: pointer;
-      transition: background-color 0.2s;
+      transition: all 0.2s;
     }
 
     .btn-buy:hover {
-      background-color: var(--wa-primary-hover);
+      background-color: var(--hacker-green);
+      color: #000;
+      box-shadow: 0 0 15px rgba(0, 255, 102, 0.8);
     }
 
     /* --- TABLES (PAKET & LAPORAN) --- */
@@ -215,57 +226,58 @@
     table {
       width: 100%;
       border-collapse: collapse;
-      background-color: var(--wa-card-bg);
-      border-radius: 8px;
+      background-color: var(--hacker-card-bg);
+      border-radius: 4px;
       overflow: hidden;
+      border: 1px solid var(--hacker-green-dark);
     }
 
     th, td {
       padding: 14px 16px;
       text-align: left;
-      border-bottom: 1px solid var(--wa-border);
-      font-size: 0.9rem;
-      color: var(--wa-text-main);
+      border-bottom: 1px solid var(--hacker-green-dark);
+      font-size: 0.85rem;
+      color: var(--hacker-text);
     }
 
     th {
-      background-color: #182229;
-      color: var(--wa-text-muted);
-      font-weight: 600;
+      background-color: #000000;
+      color: var(--hacker-green);
+      font-weight: bold;
       text-transform: uppercase;
-      font-size: 0.8rem;
-      letter-spacing: 0.5px;
+      letter-spacing: 1px;
     }
 
     tr:hover {
-      background-color: rgba(255, 255, 255, 0.02);
+      background-color: rgba(0, 255, 102, 0.05);
     }
 
     .badge {
       padding: 4px 10px;
-      border-radius: 12px;
+      border-radius: 2px;
       font-size: 0.75rem;
-      font-weight: 600;
+      font-weight: bold;
     }
 
-    .badge-success { background: rgba(0, 168, 132, 0.2); color: #00a884; }
-    .badge-pending { background: rgba(234, 179, 8, 0.2); color: #eab308; }
+    .badge-success { border: 1px solid var(--hacker-green); color: var(--hacker-green); }
+    .badge-pending { border: 1px solid #ffcc00; color: #ffcc00; }
 
     .admin-unlock-btn {
-      background-color: var(--wa-input-bg);
-      color: var(--wa-text-main);
-      border: 1px solid var(--wa-border);
+      background-color: transparent;
+      color: var(--hacker-green);
+      border: 1px solid var(--hacker-green-dark);
       padding: 10px 16px;
-      border-radius: 8px;
+      border-radius: 4px;
       font-size: 0.85rem;
-      font-weight: 500;
+      font-weight: bold;
       cursor: pointer;
       margin-bottom: 16px;
-      transition: background-color 0.2s;
+      transition: all 0.2s;
     }
 
     .admin-unlock-btn:hover {
-      background-color: #3b4a54;
+      border-color: var(--hacker-green);
+      box-shadow: 0 0 10px rgba(0, 255, 102, 0.4);
     }
 
     /* Kolom Tagih (Secured) */
@@ -278,18 +290,21 @@
     }
 
     .btn-tagih {
-      background-color: #f15c6d;
-      color: white;
-      border: none;
+      background-color: transparent;
+      color: var(--hacker-red);
+      border: 1px solid var(--hacker-red);
       padding: 6px 12px;
-      border-radius: 6px;
+      border-radius: 4px;
       cursor: pointer;
       font-size: 0.8rem;
-      font-weight: 600;
+      font-weight: bold;
+      transition: all 0.2s;
     }
 
     .btn-tagih:hover {
-      background-color: #d94354;
+      background-color: var(--hacker-red);
+      color: white;
+      box-shadow: 0 0 10px rgba(255, 0, 85, 0.8);
     }
 
     /* --- RESPONSIVE LAYOUT --- */
@@ -302,7 +317,7 @@
         width: 100%;
         flex-direction: row;
         border-right: none;
-        border-bottom: 1px solid var(--wa-border);
+        border-bottom: 1px solid var(--hacker-green-dark);
         padding: 8px;
       }
 
@@ -310,7 +325,7 @@
         flex: 1;
         justify-content: center;
         padding: 10px;
-        font-size: 0.85rem;
+        font-size: 0.8rem;
       }
 
       .order-grid {
@@ -325,17 +340,17 @@
 </head>
 <body>
 
-  <!-- HEADER WA WEB STYLE -->
+  <!-- HEADER HACKER TERMINAL -->
   <header>
-    💬 ARDAF STORE
+    &#10095;_ ARDAF_STORE // TERMINAL_
   </header>
 
   <div class="app-container">
     <!-- SIDEBAR TAB NAVIGATION -->
     <aside class="sidebar">
-      <button class="tab-btn active" onclick="switchTab('order', this)">🛒 ORDER</button>
-      <button class="tab-btn" onclick="switchTab('paket', this)">📦 PAKET</button>
-      <button class="tab-btn" onclick="switchTab('laporan', this)">📋 LAPORAN</button>
+      <button class="tab-btn active" onclick="switchTab('order', this)">[1] ORDER</button>
+      <button class="tab-btn" onclick="switchTab('paket', this)">[2] PAKET</button>
+      <button class="tab-btn" onclick="switchTab('laporan', this)">[3] LAPORAN</button>
     </aside>
 
     <!-- MAIN CONTENT -->
@@ -344,19 +359,19 @@
       <!-- MENU 1: ORDER -->
       <section id="tab-order" class="tab-panel active">
         <div class="card">
-          <div class="card-title">Form Pemesanan Baru</div>
+          <div class="card-title">root@ardaf:~# ./execute_order.sh</div>
           <form onsubmit="handleOrder(event)">
             <div class="order-grid">
               <div>
                 <div class="form-group">
-                  <label for="phone">Nomor HP</label>
+                  <label for="phone">TARGET_PHONE_NUMBER</label>
                   <input type="tel" id="phone" placeholder="08xxxxxxxxxx" required>
                 </div>
                 
                 <div class="form-group">
-                  <label for="package">Pilih Paket</label>
+                  <label for="package">SELECT_PACKAGE</label>
                   <select id="package" required>
-                    <option value="" disabled selected>-- Pilih Paket Data --</option>
+                    <option value="" disabled selected>-- SELECT DATA PACKAGE --</option>
                     <option value="PKT01">PKT01 - Paket Hemat 10GB (Rp 25.000)</option>
                     <option value="PKT02">PKT02 - Paket Extra 25GB (Rp 50.000)</option>
                     <option value="PKT03">PKT03 - Paket Sultan 50GB (Rp 90.000)</option>
@@ -366,17 +381,17 @@
 
               <!-- Menu Foto / Scan AI -->
               <div class="form-group">
-                <label>Scan Nomor HP (AI Foto)</label>
+                <label>AI_OPTICAL_SCANNER</label>
                 <div class="ai-scan-box" onclick="triggerAIScan()">
-                  <span style="font-size: 2rem;">📷</span>
-                  <span style="margin-top: 8px; font-weight: 500; color: var(--wa-text-main);">Upload / Ambil Foto</span>
-                  <small style="color: var(--wa-text-muted); font-size: 0.75rem; margin-top: 4px;">AI akan otomatis membaca nomor HP dari gambar</small>
+                  <span style="font-size: 1.8rem;">[📷]</span>
+                  <span style="margin-top: 8px; font-weight: bold; color: var(--hacker-green);">UPLOAD / CAPTURE IMAGE</span>
+                  <small style="color: var(--hacker-text-muted); font-size: 0.75rem; margin-top: 4px;">[AI OCR Engine Auto-Read Active]</small>
                 </div>
                 <input type="file" id="ai-file-input" accept="image/*" style="display:none" onchange="processAIPhoto()">
               </div>
             </div>
 
-            <button type="submit" class="btn-buy">BELI SEKARANG</button>
+            <button type="submit" class="btn-buy">[ EXECUTE ORDER NOW ]</button>
           </form>
         </div>
       </section>
@@ -384,14 +399,14 @@
       <!-- MENU 2: PAKET -->
       <section id="tab-paket" class="tab-panel">
         <div class="card">
-          <div class="card-title">Daftar Paket Tersedia</div>
+          <div class="card-title">root@ardaf:~# cat /var/packages.db</div>
           <div class="table-container">
             <table>
               <thead>
                 <tr>
-                  <th>KODE PAKET</th>
+                  <th>KODE_PAKET</th>
                   <th>HARGA</th>
-                  <th>MASA AKTIF</th>
+                  <th>MASA_AKTIF</th>
                 </tr>
               </thead>
               <tbody>
@@ -419,20 +434,20 @@
       <!-- MENU 3: LAPORAN -->
       <section id="tab-laporan" class="tab-panel">
         <div class="card">
-          <div class="card-title">Laporan Transaksi</div>
+          <div class="card-title">root@ardaf:~# tail -n 50 /var/log/transactions.log</div>
           
           <!-- Tombol Akses Admin -->
-          <button class="admin-unlock-btn" onclick="unlockAdmin()">🔓 Masukkan PIN Admin (Akses Menu Tagih)</button>
+          <button class="admin-unlock-btn" onclick="unlockAdmin()">[🔓 SUDO ACCESS] Unlock Admin Mode (TAGIH)</button>
 
           <div class="table-container">
             <table>
               <thead>
                 <tr>
-                  <th>Tanggal</th>
-                  <th>Nama</th>
-                  <th>Orderan</th>
-                  <th>Status</th>
-                  <th class="col-tagih">Action</th>
+                  <th>TANGGAL</th>
+                  <th>NAMA</th>
+                  <th>ORDERAN</th>
+                  <th>STATUS</th>
+                  <th class="col-tagih">ACTION</th>
                 </tr>
               </thead>
               <tbody>
@@ -440,15 +455,15 @@
                   <td>19/08/2026</td>
                   <td>Budi Santoso</td>
                   <td>PKT02 - 25GB</td>
-                  <td><span class="badge badge-success">Lunas</span></td>
-                  <td class="col-tagih"><button class="btn-tagih" onclick="alert('Tagihan dikirim ke Budi')">TAGIH</button></td>
+                  <td><span class="badge badge-success">PAID</span></td>
+                  <td class="col-tagih"><button class="btn-tagih" onclick="alert('Tagihan dikirim ke Budi')">[TAGIH]</button></td>
                 </tr>
                 <tr>
                   <td>19/08/2026</td>
                   <td>Siti Rahma</td>
                   <td>PKT01 - 10GB</td>
-                  <td><span class="badge badge-pending">Belum Bayar</span></td>
-                  <td class="col-tagih"><button class="btn-tagih" onclick="alert('Tagihan dikirim ke Siti')">TAGIH</button></td>
+                  <td><span class="badge badge-pending">UNPAID</span></td>
+                  <td class="col-tagih"><button class="btn-tagih" onclick="alert('Tagihan dikirim ke Siti')">[TAGIH]</button></td>
                 </tr>
               </tbody>
             </table>
@@ -477,10 +492,10 @@
     function processAIPhoto() {
       const fileInput = document.getElementById('ai-file-input');
       if (fileInput.files.length > 0) {
-        alert("AI sedang memproses gambar...");
+        alert("[SYSTEM]: AI OCR Processing image stream...");
         setTimeout(() => {
           document.getElementById('phone').value = "081234567890"; // Simulasi hasil scan
-          alert("Nomor HP berhasil dideteksi oleh AI!");
+          alert("[SUCCESS]: Phone number extracted -> 081234567890");
         }, 1000);
       }
     }
@@ -488,18 +503,18 @@
     // Submit Form Order
     function handleOrder(e) {
       e.preventDefault();
-      alert("Pembelian Berhasil Diproses!");
+      alert("[SYSTEM]: Order request injected successfully!");
     }
 
     // Lock/Unlock Admin Column (PIN Tagih)
     function unlockAdmin() {
-      const pin = prompt("Masukkan PIN/Password Admin:");
+      const pin = prompt("[AUTH REQUIRED] Enter Root/Admin PIN:");
       if (pin === "1234") { // Default PIN
         const tagihColumns = document.querySelectorAll('.col-tagih');
         tagihColumns.forEach(col => col.classList.add('show'));
-        alert("Akses Admin Diberikan. Kolom TAGIH ditampilkan.");
+        alert("[ACCESS GRANTED]: Administrative privileges granted. TAGIH column visible.");
       } else if (pin !== null) {
-        alert("PIN Salah!");
+        alert("[ACCESS DENIED]: Incorrect Security PIN!");
       }
     }
   </script>
