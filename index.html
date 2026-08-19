@@ -3,105 +3,195 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ARDAF STORE // TERMINAL v1.0</title>
+  <title>ARDAF STORE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    /* --- VARIABLE TEMA HACKER / TERMINAL --- */
+    /* --- TEMA TASKORA MODERN SAAS DASHBOARD --- */
     :root {
-      --hacker-bg: #0a0a0a;          /* Black Matrix */
-      --hacker-card-bg: #111411;     /* Dark Gray Green */
-      --hacker-green: #00ff66;       /* Neon Green */
-      --hacker-green-dark: #008033;  
-      --hacker-text: #00ff66;        
-      --hacker-text-muted: #00a340;   
-      --hacker-border: #00ff66;      
-      --hacker-input-bg: #050d08;    
-      --hacker-red: #ff0055;         /* Red Cyber */
-      --sidebar-width: 240px;
+      --bg-app: #f4f5f9;
+      --card-bg: #ffffff;
+      --primary: #7c5cfc;            /* Purple Vibrant Accent */
+      --primary-hover: #6941f2;
+      --primary-soft: #ede8ff;       /* Soft Purple Active Tab */
+      --text-main: #1e2022;
+      --text-muted: #838e9e;
+      --border-color: #f0f1f5;
+      --input-bg: #f8f9fc;
+      --badge-green-bg: #e6f9f0;
+      --badge-green-text: #10b981;
+      --badge-yellow-bg: #fff8e6;
+      --badge-yellow-text: #f59e0b;
+      --sidebar-width: 260px;
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Courier New', Courier, monospace, sans-serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
     }
 
     body {
-      background-color: var(--hacker-bg);
-      color: var(--hacker-text);
+      background-color: var(--bg-app);
+      color: var(--text-main);
       display: flex;
-      flex-direction: column;
       min-height: 100vh;
     }
 
-    /* --- HEADER --- */
-    header {
-      background-color: #000000;
-      color: var(--hacker-green);
-      padding: 16px 24px;
-      font-size: 1.3rem;
-      font-weight: bold;
-      letter-spacing: 2px;
+    /* --- SIDEBAR --- */
+    aside.sidebar {
+      width: var(--sidebar-width);
+      background-color: var(--card-bg);
+      display: flex;
+      flex-direction: column;
+      padding: 28px 18px;
+      border-right: 1px solid var(--border-color);
+    }
+
+    .brand-logo {
       display: flex;
       align-items: center;
       gap: 12px;
-      border-bottom: 2px solid var(--hacker-green);
-      text-shadow: 0 0 8px rgba(0, 255, 102, 0.6);
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 36px;
+      padding-left: 8px;
     }
 
-    /* --- LAYOUT UTAMA --- */
-    .app-container {
+    .brand-icon {
+      width: 32px;
+      height: 32px;
+      background: var(--primary);
+      border-radius: 10px;
       display: flex;
-      flex: 1;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.1rem;
     }
 
-    /* --- SIDEBAR MENU --- */
-    .sidebar {
-      width: var(--sidebar-width);
-      background-color: #050505;
-      border-right: 1px solid var(--hacker-green-dark);
+    .nav-tabs {
       display: flex;
       flex-direction: column;
       gap: 8px;
-      padding: 16px 10px;
     }
 
     .tab-btn {
       background: transparent;
-      border: 1px solid var(--hacker-green-dark);
-      padding: 12px 16px;
+      border: none;
+      padding: 14px 20px;
       text-align: left;
-      font-size: 0.9rem;
-      font-weight: bold;
-      color: var(--hacker-text-muted);
-      border-radius: 4px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      border-radius: 14px;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.25s ease;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 14px;
     }
 
     .tab-btn:hover {
-      background-color: rgba(0, 255, 102, 0.1);
-      color: var(--hacker-green);
-      border-color: var(--hacker-green);
-      box-shadow: 0 0 8px rgba(0, 255, 102, 0.3);
+      background-color: var(--bg-app);
+      color: var(--primary);
     }
 
     .tab-btn.active {
-      background-color: var(--hacker-green);
-      color: #000000;
-      font-weight: bold;
-      box-shadow: 0 0 12px rgba(0, 255, 102, 0.8);
-      border-color: var(--hacker-green);
+      background-color: var(--primary-soft);
+      color: var(--primary);
+      font-weight: 700;
     }
 
-    /* --- CONTENT AREA --- */
-    .content {
+    /* --- MAIN CONTENT AREA --- */
+    .main-wrapper {
       flex: 1;
-      padding: 24px;
-      background-color: var(--hacker-bg);
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* --- TOP HEADER --- */
+    header.top-header {
+      padding: 20px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: transparent;
+    }
+
+    .search-bar {
+      position: relative;
+      width: 380px;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 12px 20px 12px 42px;
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      font-size: 0.9rem;
+      outline: none;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+      transition: border 0.2s;
+    }
+
+    .search-bar input:focus {
+      border-color: var(--primary);
+    }
+
+    .search-bar::before {
+      content: "🔍";
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.85rem;
+      opacity: 0.5;
+    }
+
+    .user-profile {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .btn-action-primary {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 16px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(124, 92, 252, 0.3);
+      transition: all 0.2s;
+    }
+
+    .btn-action-primary:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #ffd6e0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+
+    /* --- CONTENT PANELS --- */
+    .content-container {
+      padding: 12px 32px 32px 32px;
     }
 
     .tab-panel {
@@ -110,177 +200,171 @@
 
     .tab-panel.active {
       display: block;
-      animation: glitch 0.2s ease-in-out;
+      animation: fadeInUp 0.3s ease;
     }
 
-    @keyframes glitch {
-      0% { opacity: 0; transform: translateX(-5px); }
-      50% { opacity: 0.8; transform: translateX(5px); }
-      100% { opacity: 1; transform: translateX(0); }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    /* --- FORM & CARDS --- */
-    .card {
-      background-color: var(--hacker-card-bg);
-      border-radius: 4px;
-      padding: 24px;
-      border: 1px solid var(--hacker-green-dark);
-      box-shadow: 0 0 10px rgba(0, 255, 102, 0.1);
-      margin-bottom: 20px;
+    /* --- CARDS & FORM --- */
+    .dashboard-card {
+      background: var(--card-bg);
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+      border: 1px solid var(--border-color);
+      margin-bottom: 24px;
     }
 
-    .card-title {
-      font-size: 1.1rem;
-      color: var(--hacker-green);
-      margin-bottom: 20px;
-      font-weight: bold;
-      letter-spacing: 1px;
-      text-shadow: 0 0 5px rgba(0, 255, 102, 0.5);
+    .card-header-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 24px;
     }
 
     .order-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 20px;
+      gap: 24px;
     }
 
     .form-group {
       display: flex;
       flex-direction: column;
       gap: 8px;
-      margin-bottom: 18px;
+      margin-bottom: 20px;
     }
 
-    label {
-      font-size: 0.8rem;
-      font-weight: bold;
-      color: var(--hacker-text-muted);
-      text-transform: uppercase;
-      letter-spacing: 1px;
+    .form-group label {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-muted);
     }
 
-    input, select {
+    input.form-input, select.form-input {
       width: 100%;
-      padding: 12px 14px;
-      border: 1px solid var(--hacker-green-dark);
-      border-radius: 4px;
-      outline: none;
+      padding: 14px 18px;
+      border: 1px solid var(--border-color);
+      background-color: var(--input-bg);
+      border-radius: 14px;
       font-size: 0.95rem;
+      outline: none;
+      color: var(--text-main);
       transition: all 0.2s;
-      background-color: var(--hacker-input-bg);
-      color: var(--hacker-green);
     }
 
-    input:focus, select:focus {
-      border-color: var(--hacker-green);
-      box-shadow: 0 0 10px rgba(0, 255, 102, 0.5);
+    input.form-input:focus, select.form-input:focus {
+      border-color: var(--primary);
+      background-color: #ffffff;
+      box-shadow: 0 0 0 4px rgba(124, 92, 252, 0.1);
     }
 
-    /* AI Photo Area */
-    .ai-scan-box {
-      border: 2px dashed var(--hacker-green-dark);
-      background-color: rgba(0, 255, 102, 0.02);
-      border-radius: 4px;
+    /* AI Photo Scanner Card Style */
+    .ai-scan-card {
+      border: 2px dashed #d1d5db;
+      background-color: var(--input-bg);
+      border-radius: 20px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 20px;
+      padding: 24px;
       text-align: center;
       cursor: pointer;
-      min-height: 170px;
-      transition: all 0.2s;
+      min-height: 180px;
+      transition: all 0.25s;
     }
 
-    .ai-scan-box:hover {
-      background-color: rgba(0, 255, 102, 0.08);
-      border-color: var(--hacker-green);
-      box-shadow: 0 0 10px rgba(0, 255, 102, 0.2);
+    .ai-scan-card:hover {
+      border-color: var(--primary);
+      background-color: var(--primary-soft);
     }
 
-    .btn-buy {
-      width: 100%;
-      padding: 14px;
-      background-color: transparent;
-      color: var(--hacker-green);
-      border: 1px solid var(--hacker-green);
-      border-radius: 4px;
-      font-size: 1rem;
-      font-weight: bold;
-      letter-spacing: 2px;
-      cursor: pointer;
-      transition: all 0.2s;
+    .ai-scan-icon {
+      width: 50px;
+      height: 50px;
+      background-color: #ffffff;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     }
 
-    .btn-buy:hover {
-      background-color: var(--hacker-green);
-      color: #000;
-      box-shadow: 0 0 15px rgba(0, 255, 102, 0.8);
-    }
-
-    /* --- TABLES (PAKET & LAPORAN) --- */
-    .table-container {
+    /* --- TABLES --- */
+    .table-responsive {
       overflow-x: auto;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      background-color: var(--hacker-card-bg);
-      border-radius: 4px;
-      overflow: hidden;
-      border: 1px solid var(--hacker-green-dark);
-    }
-
-    th, td {
-      padding: 14px 16px;
-      text-align: left;
-      border-bottom: 1px solid var(--hacker-green-dark);
-      font-size: 0.85rem;
-      color: var(--hacker-text);
     }
 
     th {
-      background-color: #000000;
-      color: var(--hacker-green);
-      font-weight: bold;
+      text-align: left;
+      padding: 16px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-muted);
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 0.5px;
+      border-bottom: 1px solid var(--border-color);
     }
 
-    tr:hover {
-      background-color: rgba(0, 255, 102, 0.05);
+    td {
+      padding: 18px 16px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-main);
     }
 
-    .badge {
-      padding: 4px 10px;
-      border-radius: 2px;
-      font-size: 0.75rem;
-      font-weight: bold;
+    tr:last-child td {
+      border-bottom: none;
     }
 
-    .badge-success { border: 1px solid var(--hacker-green); color: var(--hacker-green); }
-    .badge-pending { border: 1px solid #ffcc00; color: #ffcc00; }
+    .status-badge {
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      display: inline-block;
+    }
 
-    .admin-unlock-btn {
-      background-color: transparent;
-      color: var(--hacker-green);
-      border: 1px solid var(--hacker-green-dark);
-      padding: 10px 16px;
-      border-radius: 4px;
+    .status-badge.success {
+      background-color: var(--badge-green-bg);
+      color: var(--badge-green-text);
+    }
+
+    .status-badge.pending {
+      background-color: var(--badge-yellow-bg);
+      color: var(--badge-yellow-text);
+    }
+
+    /* Admin Action Button */
+    .btn-admin-unlock {
+      background-color: var(--input-bg);
+      color: var(--primary);
+      border: 1px solid var(--border-color);
+      padding: 10px 18px;
+      border-radius: 14px;
       font-size: 0.85rem;
-      font-weight: bold;
+      font-weight: 700;
       cursor: pointer;
-      margin-bottom: 16px;
+      margin-bottom: 20px;
       transition: all 0.2s;
     }
 
-    .admin-unlock-btn:hover {
-      border-color: var(--hacker-green);
-      box-shadow: 0 0 10px rgba(0, 255, 102, 0.4);
+    .btn-admin-unlock:hover {
+      background-color: var(--primary-soft);
     }
 
-    /* Kolom Tagih (Secured) */
     .col-tagih {
       display: none;
     }
@@ -289,50 +373,55 @@
       display: table-cell;
     }
 
-    .btn-tagih {
-      background-color: transparent;
-      color: var(--hacker-red);
-      border: 1px solid var(--hacker-red);
-      padding: 6px 12px;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 0.8rem;
-      font-weight: bold;
-      transition: all 0.2s;
-    }
-
-    .btn-tagih:hover {
-      background-color: var(--hacker-red);
+    .btn-tagih-action {
+      background-color: #ff4d4d;
       color: white;
-      box-shadow: 0 0 10px rgba(255, 0, 85, 0.8);
+      border: none;
+      padding: 8px 16px;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(255, 77, 77, 0.25);
     }
 
-    /* --- RESPONSIVE LAYOUT --- */
-    @media (max-width: 768px) {
-      .app-container {
+    /* --- RESPONSIVE MOBILE --- */
+    @media (max-width: 900px) {
+      body {
         flex-direction: column;
       }
 
-      .sidebar {
+      aside.sidebar {
         width: 100%;
-        flex-direction: row;
         border-right: none;
-        border-bottom: 1px solid var(--hacker-green-dark);
-        padding: 8px;
+        border-bottom: 1px solid var(--border-color);
+        padding: 16px;
+      }
+
+      .brand-logo {
+        margin-bottom: 16px;
+      }
+
+      .nav-tabs {
+        flex-direction: row;
       }
 
       .tab-btn {
         flex: 1;
         justify-content: center;
         padding: 10px;
-        font-size: 0.8rem;
+        font-size: 0.85rem;
+      }
+
+      .search-bar {
+        width: 200px;
       }
 
       .order-grid {
         grid-template-columns: 1fr;
       }
 
-      .content {
+      .content-container {
         padding: 16px;
       }
     }
@@ -340,38 +429,62 @@
 </head>
 <body>
 
-  <!-- HEADER HACKER TERMINAL -->
-  <header>
-    &#10095;_ ARDAF_STORE // TERMINAL_
-  </header>
+  <!-- SIDEBAR NAVIGATION -->
+  <aside class="sidebar">
+    <div class="brand-logo">
+      <div class="brand-icon">✓</div>
+      ARDAF STORE
+    </div>
 
-  <div class="app-container">
-    <!-- SIDEBAR TAB NAVIGATION -->
-    <aside class="sidebar">
-      <button class="tab-btn active" onclick="switchTab('order', this)">[1] ORDER</button>
-      <button class="tab-btn" onclick="switchTab('paket', this)">[2] PAKET</button>
-      <button class="tab-btn" onclick="switchTab('laporan', this)">[3] LAPORAN</button>
-    </aside>
+    <nav class="nav-tabs">
+      <button class="tab-btn active" onclick="switchTab('order', this)">
+        <span>🛒</span> ORDER
+      </button>
+      <button class="tab-btn" onclick="switchTab('paket', this)">
+        <span>📦</span> PAKET
+      </button>
+      <button class="tab-btn" onclick="switchTab('laporan', this)">
+        <span>📊</span> LAPORAN
+      </button>
+    </nav>
+  </aside>
 
-    <!-- MAIN CONTENT -->
-    <main class="content">
+  <!-- MAIN WRAPPER -->
+  <div class="main-wrapper">
+
+    <!-- TOP HEADER -->
+    <header class="top-header">
+      <div class="search-bar">
+        <input type="text" placeholder="Search orders, packages...">
+      </div>
+
+      <div class="user-profile">
+        <button class="btn-action-primary" onclick="switchTab('order', document.querySelectorAll('.tab-btn')[0])">+ New Order</button>
+        <div class="avatar">👤</div>
+      </div>
+    </header>
+
+    <!-- CONTENT CONTAINER -->
+    <main class="content-container">
 
       <!-- MENU 1: ORDER -->
       <section id="tab-order" class="tab-panel active">
-        <div class="card">
-          <div class="card-title">root@ardaf:~# ./execute_order.sh</div>
+        <div class="dashboard-card">
+          <div class="card-header-title">Create New Order</div>
           <form onsubmit="handleOrder(event)">
             <div class="order-grid">
+              
+              <!-- Left Column Form -->
               <div>
                 <div class="form-group">
-                  <label for="phone">TARGET_PHONE_NUMBER</label>
-                  <input type="tel" id="phone" placeholder="08xxxxxxxxxx" required>
+                  <label for="phone">Customer Phone Number</label>
+                  <input type="tel" id="phone" class="form-input" placeholder="08xxxxxxxxxx" required>
                 </div>
-                
+
                 <div class="form-group">
-                  <label for="package">SELECT_PACKAGE</label>
-                  <select id="package" required>
-                    <option value="" disabled selected>-- SELECT DATA PACKAGE --</option>
+                  <label for="package">Select Data Package</label>
+                  <select id="package" class="form-input" required>
+                    <option value="" disabled selected>-- Choose Package --</option>
                     <option value="PKT01">PKT01 - Paket Hemat 10GB (Rp 25.000)</option>
                     <option value="PKT02">PKT02 - Paket Extra 25GB (Rp 50.000)</option>
                     <option value="PKT03">PKT03 - Paket Sultan 50GB (Rp 90.000)</option>
@@ -379,49 +492,52 @@
                 </div>
               </div>
 
-              <!-- Menu Foto / Scan AI -->
+              <!-- Right Column AI Photo Scanner -->
               <div class="form-group">
-                <label>AI_OPTICAL_SCANNER</label>
-                <div class="ai-scan-box" onclick="triggerAIScan()">
-                  <span style="font-size: 1.8rem;">[📷]</span>
-                  <span style="margin-top: 8px; font-weight: bold; color: var(--hacker-green);">UPLOAD / CAPTURE IMAGE</span>
-                  <small style="color: var(--hacker-text-muted); font-size: 0.75rem; margin-top: 4px;">[AI OCR Engine Auto-Read Active]</small>
+                <label>Scan Phone Number (AI Photo)</label>
+                <div class="ai-scan-card" onclick="triggerAIScan()">
+                  <div class="ai-scan-icon">📷</div>
+                  <strong style="color: var(--text-main); font-size: 0.95rem;">Upload Photo / Scan</strong>
+                  <span style="color: var(--text-muted); font-size: 0.8rem; margin-top: 4px;">AI will automatically extract phone numbers</span>
                 </div>
                 <input type="file" id="ai-file-input" accept="image/*" style="display:none" onchange="processAIPhoto()">
               </div>
+
             </div>
 
-            <button type="submit" class="btn-buy">[ EXECUTE ORDER NOW ]</button>
+            <button type="submit" class="btn-action-primary" style="width: 100%; padding: 16px; margin-top: 10px; font-size: 1rem;">
+              Beli Sekarang
+            </button>
           </form>
         </div>
       </section>
 
       <!-- MENU 2: PAKET -->
       <section id="tab-paket" class="tab-panel">
-        <div class="card">
-          <div class="card-title">root@ardaf:~# cat /var/packages.db</div>
-          <div class="table-container">
+        <div class="dashboard-card">
+          <div class="card-header-title">Daftar Paket Data</div>
+          <div class="table-responsive">
             <table>
               <thead>
                 <tr>
-                  <th>KODE_PAKET</th>
-                  <th>HARGA</th>
-                  <th>MASA_AKTIF</th>
+                  <th>Kode Paket</th>
+                  <th>Harga</th>
+                  <th>Masa Aktif</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td><b>PKT01</b></td>
+                  <td><b style="color: var(--primary);">PKT01</b></td>
                   <td>Rp 25.000</td>
                   <td>7 Hari</td>
                 </tr>
                 <tr>
-                  <td><b>PKT02</b></td>
+                  <td><b style="color: var(--primary);">PKT02</b></td>
                   <td>Rp 50.000</td>
                   <td>30 Hari</td>
                 </tr>
                 <tr>
-                  <td><b>PKT03</b></td>
+                  <td><b style="color: var(--primary);">PKT03</b></td>
                   <td>Rp 90.000</td>
                   <td>30 Hari</td>
                 </tr>
@@ -433,21 +549,21 @@
 
       <!-- MENU 3: LAPORAN -->
       <section id="tab-laporan" class="tab-panel">
-        <div class="card">
-          <div class="card-title">root@ardaf:~# tail -n 50 /var/log/transactions.log</div>
-          
-          <!-- Tombol Akses Admin -->
-          <button class="admin-unlock-btn" onclick="unlockAdmin()">[🔓 SUDO ACCESS] Unlock Admin Mode (TAGIH)</button>
+        <div class="dashboard-card">
+          <div class="card-header-title">Laporan Transaksi</div>
 
-          <div class="table-container">
+          <!-- Admin Unlock Button -->
+          <button class="btn-admin-unlock" onclick="unlockAdmin()">🔓 Masukkan PIN Admin (Tampilkan Column Tagih)</button>
+
+          <div class="table-responsive">
             <table>
               <thead>
                 <tr>
-                  <th>TANGGAL</th>
-                  <th>NAMA</th>
-                  <th>ORDERAN</th>
-                  <th>STATUS</th>
-                  <th class="col-tagih">ACTION</th>
+                  <th>Tanggal</th>
+                  <th>Nama</th>
+                  <th>Orderan</th>
+                  <th>Status</th>
+                  <th class="col-tagih">Tagih</th>
                 </tr>
               </thead>
               <tbody>
@@ -455,15 +571,19 @@
                   <td>19/08/2026</td>
                   <td>Budi Santoso</td>
                   <td>PKT02 - 25GB</td>
-                  <td><span class="badge badge-success">PAID</span></td>
-                  <td class="col-tagih"><button class="btn-tagih" onclick="alert('Tagihan dikirim ke Budi')">[TAGIH]</button></td>
+                  <td><span class="status-badge success">Lunas</span></td>
+                  <td class="col-tagih">
+                    <button class="btn-tagih-action" onclick="alert('Tagihan dikirim ke Budi')">TAGIH</button>
+                  </td>
                 </tr>
                 <tr>
                   <td>19/08/2026</td>
                   <td>Siti Rahma</td>
                   <td>PKT01 - 10GB</td>
-                  <td><span class="badge badge-pending">UNPAID</span></td>
-                  <td class="col-tagih"><button class="btn-tagih" onclick="alert('Tagihan dikirim ke Siti')">[TAGIH]</button></td>
+                  <td><span class="status-badge pending">Belum Bayar</span></td>
+                  <td class="col-tagih">
+                    <button class="btn-tagih-action" onclick="alert('Tagihan dikirim ke Siti')">TAGIH</button>
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -475,16 +595,16 @@
   </div>
 
   <script>
-    // Tab Navigation Logic
+    // Tab Switching Mechanism
     function switchTab(tabId, element) {
       document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
       document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
       
       document.getElementById('tab-' + tabId).classList.add('active');
-      element.classList.add('active');
+      if(element) element.classList.add('active');
     }
 
-    // Simulasi AI Scan Foto
+    // AI Scan Simulation
     function triggerAIScan() {
       document.getElementById('ai-file-input').click();
     }
@@ -492,29 +612,29 @@
     function processAIPhoto() {
       const fileInput = document.getElementById('ai-file-input');
       if (fileInput.files.length > 0) {
-        alert("[SYSTEM]: AI OCR Processing image stream...");
+        alert("AI sedang memproses gambar...");
         setTimeout(() => {
-          document.getElementById('phone').value = "081234567890"; // Simulasi hasil scan
-          alert("[SUCCESS]: Phone number extracted -> 081234567890");
-        }, 1000);
+          document.getElementById('phone').value = "081234567890";
+          alert("Nomor HP berhasil dibaca AI: 081234567890");
+        }, 800);
       }
     }
 
-    // Submit Form Order
+    // Handle Order Submit
     function handleOrder(e) {
       e.preventDefault();
-      alert("[SYSTEM]: Order request injected successfully!");
+      alert("Order berhasil dibuat!");
     }
 
-    // Lock/Unlock Admin Column (PIN Tagih)
+    // Unlock Admin Tagih Column
     function unlockAdmin() {
-      const pin = prompt("[AUTH REQUIRED] Enter Root/Admin PIN:");
+      const pin = prompt("Masukkan PIN/Password Admin:");
       if (pin === "1234") { // Default PIN
-        const tagihColumns = document.querySelectorAll('.col-tagih');
-        tagihColumns.forEach(col => col.classList.add('show'));
-        alert("[ACCESS GRANTED]: Administrative privileges granted. TAGIH column visible.");
+        const tagihCols = document.querySelectorAll('.col-tagih');
+        tagihCols.forEach(col => col.classList.add('show'));
+        alert("Akses Admin Diberikan. Kolom TAGIH berhasil ditampilkan.");
       } else if (pin !== null) {
-        alert("[ACCESS DENIED]: Incorrect Security PIN!");
+        alert("PIN Admin Salah!");
       }
     }
   </script>
