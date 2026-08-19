@@ -1,405 +1,495 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistem Transaksi Konter</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <style>
-        :root {
-            --primary-purple: #7c4dff;
-            --light-purple: #f3e8ff;
-            --bg-gradient: linear-gradient(135deg, #f5f3ff 0%, #e0e7ff 100%);
-            --card-shadow: 0 10px 25px -5px rgba(124, 77, 255, 0.1), 0 8px 10px -6px rgba(124, 77, 255, 0.1);
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ARDAF STORE</title>
+  <style>
+    /* --- CSS RESET & VARIABLE TEMA LILAC --- */
+    :root {
+      --primary: #8b5cf6;        /* Primary Lilac Vibrant */
+      --primary-light: #f3e8ff;  /* Soft Lilac Background */
+      --primary-dark: #6d28d9;   /* Deep Lilac */
+      --accent: #c084fc;         /* Accent Lilac */
+      --bg-body: #faf5ff;        /* Very Soft Lilac Tint */
+      --card-bg: #ffffff;
+      --text-main: #334155;
+      --text-muted: #64748b;
+      --border-color: #e9d5ff;
+      --sidebar-width: 240px;
+    }
 
-        body {
-            background: var(--bg-gradient);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            min-height: 100vh;
-            color: #334155;
-        }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-        .navbar-custom {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(124, 77, 255, 0.15);
-        }
+    body {
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
 
-        .card-custom {
-            background: #ffffff;
-            border: none;
-            border-radius: 16px;
-            box-shadow: var(--card-shadow);
-            transition: all 0.3s ease;
-        }
+    /* --- HEADER --- */
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: white;
+      padding: 18px 24px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 12px rgba(139, 92, 246, 0.15);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
 
-        .btn-purple {
-            background-color: var(--primary-purple);
-            color: #ffffff;
-            border: none;
-            border-radius: 10px;
-            padding: 10px 20px;
-            font-weight: 600;
-            transition: all 0.2s ease;
-        }
+    /* --- LAYOUT UTAMA --- */
+    .app-container {
+      display: flex;
+      flex: 1;
+    }
 
-        .btn-purple:hover {
-            background-color: #651fff;
-            color: #ffffff;
-            transform: translateY(-1px);
-        }
+    /* --- SIDEBAR MENU --- */
+    .sidebar {
+      width: var(--sidebar-width);
+      background-color: var(--card-bg);
+      border-right: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 20px 12px;
+    }
 
-        .form-control, .form-select {
-            border-radius: 10px;
-            border: 1.5px solid #e2e8f0;
-            padding: 10px 14px;
-        }
+    .tab-btn {
+      background: transparent;
+      border: none;
+      padding: 14px 18px;
+      text-align: left;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-        .form-control:focus, .form-select:focus {
-            border-color: var(--primary-purple);
-            box-shadow: 0 0 0 3px rgba(124, 77, 255, 0.2);
-        }
+    .tab-btn:hover {
+      background-color: var(--primary-light);
+      color: var(--primary-dark);
+    }
 
-        .badge-pending {
-            background-color: #fef3c7;
-            color: #d97706;
-        }
+    .tab-btn.active {
+      background-color: var(--primary);
+      color: white;
+      box-shadow: 0 4px 10px rgba(139, 92, 246, 0.3);
+    }
 
-        .badge-success {
-            background-color: #dcfce7;
-            color: #15803d;
-        }
+    /* --- CONTENT AREA --- */
+    .content {
+      flex: 1;
+      padding: 28px;
+    }
 
-        .status-badge {
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.82rem;
-            font-weight: 600;
-        }
+    .tab-panel {
+      display: none;
+    }
 
-        .nav-pills .nav-link.active {
-            background-color: var(--primary-purple);
-            border-radius: 10px;
-        }
+    .tab-panel.active {
+      display: block;
+      animation: fadeIn 0.3s ease-in-out;
+    }
 
-        .nav-pills .nav-link {
-            color: var(--primary-purple);
-            font-weight: 600;
-            border-radius: 10px;
-        }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-        .table-custom {
-            border-radius: 12px;
-            overflow: hidden;
-        }
+    /* --- FORM & CARDS (MENU ORDER) --- */
+    .card {
+      background-color: var(--card-bg);
+      border-radius: 14px;
+      padding: 24px;
+      box-shadow: 0 4px 20px rgba(139, 92, 246, 0.06);
+      border: 1px solid var(--border-color);
+      margin-bottom: 20px;
+    }
 
-        .loader-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(4px);
-            z-index: 9999;
-            align-items: center;
-            justify-content: center;
-        }
-    </style>
+    .card-title {
+      font-size: 1.2rem;
+      color: var(--primary-dark);
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    .order-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      outline: none;
+      font-size: 0.95rem;
+      transition: border 0.2s;
+      background-color: #faf5ff;
+    }
+
+    input:focus, select:focus {
+      border-color: var(--primary);
+      background-color: #fff;
+      box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+    }
+
+    /* AI Photo Area */
+    .ai-scan-box {
+      border: 2px dashed var(--accent);
+      background-color: var(--primary-light);
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      min-height: 180px;
+      transition: background 0.3s;
+    }
+
+    .ai-scan-box:hover {
+      background-color: #ebd5ff;
+    }
+
+    .btn-buy {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.1s, box-shadow 0.2s;
+    }
+
+    .btn-buy:hover {
+      box-shadow: 0 6px 16px rgba(139, 92, 246, 0.35);
+      transform: translateY(-1px);
+    }
+
+    /* --- TABLES (MENU LAPORAN & PAKET) --- */
+    .table-container {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 14px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border-color);
+      font-size: 0.9rem;
+    }
+
+    th {
+      background-color: var(--primary-light);
+      color: var(--primary-dark);
+      font-weight: 700;
+    }
+
+    tr:hover {
+      background-color: #fdf8ff;
+    }
+
+    .badge {
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .badge-success { background: #dcfce7; color: #15803d; }
+    .badge-pending { background: #fef9c3; color: #a16207; }
+
+    .admin-unlock-btn {
+      background-color: var(--primary-light);
+      color: var(--primary-dark);
+      border: 1px solid var(--accent);
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-bottom: 16px;
+    }
+
+    .admin-unlock-btn:hover {
+      background-color: var(--accent);
+      color: white;
+    }
+
+    /* Kolom Tagih (Secured) */
+    .col-tagih {
+      display: none;
+    }
+
+    .col-tagih.show {
+      display: table-cell;
+    }
+
+    .btn-tagih {
+      background-color: #ef4444;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+
+    /* --- RESPONSIVE LAYOUT --- */
+    @media (max-width: 768px) {
+      .app-container {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        flex-direction: row;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        padding: 8px;
+      }
+
+      .tab-btn {
+        flex: 1;
+        justify-content: center;
+        padding: 10px;
+        font-size: 0.85rem;
+      }
+
+      .order-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .content {
+        padding: 16px;
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <!-- Overlay Loader -->
-    <div id="loader" class="loader-overlay">
-        <div class="text-center">
-            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status"></div>
-            <p class="mt-3 fw-bold text-dark">Memproses request...</p>
-        </div>
-    </div>
+  <!-- HEADER -->
+  <header>
+    🛍️ ARDAF STORE
+  </header>
 
-    <!-- Header / Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="#" style="color: var(--primary-purple);">
-                <i class="fa-solid fa-bolt me-2"></i>Konter Digital
-            </a>
-            <div class="d-flex align-items-center">
-                <input type="password" id="pinAdmin" class="form-control form-control-sm me-2" style="width: 110px;" placeholder="PIN Admin">
-                <button class="btn btn-purple btn-sm" onclick="loadPembeli()"><i class="fa-solid fa-sync"></i> Refresh</button>
-            </div>
-        </div>
-    </nav>
+  <div class="app-container">
+    <!-- SIDEBAR TAB NAVIGATION -->
+    <aside class="sidebar">
+      <button class="tab-btn active" onclick="switchTab('order', this)">🛒 ORDER</button>
+      <button class="tab-btn" onclick="switchTab('laporan', this)">📋 LAPORAN</button>
+      <button class="tab-btn" onclick="switchTab('paket', this)">📦 PAKET</button>
+    </aside>
 
-    <div class="container my-4">
-        <!-- Tab Navigasi -->
-        <ul class="nav nav-pills mb-4 justify-content-center bg-white p-2 rounded-3 shadow-sm" id="pills-tab" role="tablist">
-            <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="pills-order-tab" data-bs-toggle="pill" data-bs-target="#pills-order" type="button"><i class="fa-solid fa-cart-shopping me-1"></i> Order Web</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="pills-manual-tab" data-bs-toggle="pill" data-bs-target="#pills-manual" type="button"><i class="fa-solid fa-keyboard me-1"></i> TRX Manual</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="pills-data-tab" data-bs-toggle="pill" data-bs-target="#pills-data" type="button" onclick="loadPembeli()"><i class="fa-solid fa-list me-1"></i> Laporan TRX</button>
-            </li>
-        </ul>
+    <!-- MAIN CONTENT -->
+    <main class="content">
 
-        <div class="tab-content" id="pills-tabContent">
-            
-            <!-- TAB 1: FORM ORDERAN WEB -->
-            <div class="tab-pane fade show active" id="pills-order">
-                <div class="row justify-content-center">
-                    <div class="col-md-6">
-                        <div class="card card-custom p-4">
-                            <h5 class="fw-bold mb-3 text-center" style="color: var(--primary-purple);"><i class="fa-solid fa-mobile-screen me-2"></i>Beli Paket Data</h5>
-                            <form id="formWebOrder">
-                                <div class="mb-3">
-                                    <label class="form-label fw-semibold">Nomor HP / WA</label>
-                                    <input type="number" id="webNomor" class="form-control" placeholder="08xxxxxxxxxx" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label fw-semibold">Pilih Paket Data</label>
-                                    <select id="webPaket" class="form-select" required>
-                                        <option value="">-- Pilih Paket --</option>
-                                        <option value="Telkomsel 5GB 30 Hari">Telkomsel 5GB 30 Hari</option>
-                                        <option value="Indosat 10GB 30 Hari">Indosat 10GB 30 Hari</option>
-                                        <option value="XL Extra Combo 15GB">XL Extra Combo 15GB</option>
-                                    </select>
-                                </div>
-                                <button type="submit" class="btn btn-purple w-100 mt-2"><i class="fa-solid fa-paper-plane me-1"></i> Kirim Pesanan</button>
-                            </form>
-                            
-                            <!-- Status Order Cek ID -->
-                            <div id="orderStatusBox" class="mt-4 p-3 bg-light rounded-3 d-none text-center">
-                                <p class="mb-1 text-muted small">ID Transaksi Anda:</p>
-                                <h4 class="fw-bold text-dark" id="displayID">-</h4>
-                                <p class="mb-2">Status: <span id="displayStatus" class="status-badge badge-pending">PENDING</span></p>
-                                <button class="btn btn-sm btn-outline-secondary" onclick="cekStatusOrder()"><i class="fa-solid fa-arrows-rotate me-1"></i> Cek Status Terkini</button>
-                            </div>
-                        </div>
-                    </div>
+      <!-- MENU 1: ORDER -->
+      <section id="tab-order" class="tab-panel active">
+        <div class="card">
+          <div class="card-title">Form Pemesanan Baru</div>
+          <form onsubmit="handleOrder(event)">
+            <div class="order-grid">
+              <div>
+                <div class="form-group">
+                  <label for="phone">Nomor HP</label>
+                  <input type="tel" id="phone" placeholder="08xxxxxxxxxx" required>
                 </div>
-            </div>
-
-            <!-- TAB 2: CATAT TRX MANUAL KONTER -->
-            <div class="tab-pane fade" id="pills-manual">
-                <div class="row justify-content-center">
-                    <div class="col-md-6">
-                        <div class="card card-custom p-4">
-                            <h5 class="fw-bold mb-3 text-center" style="color: var(--primary-purple);"><i class="fa-solid fa-cash-register me-2"></i>Catat Transaksi Manual</h5>
-                            <form id="formManualTrx">
-                                <div class="mb-3">
-                                    <label class="form-label fw-semibold">Nomor WA Pengisi</label>
-                                    <input type="number" id="manualNomorWA" class="form-control" placeholder="085796695681">
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label fw-semibold">Nomor Pelanggan (Target)</label>
-                                    <input type="number" id="manualNomorPelanggan" class="form-control" placeholder="08xxxxxxxxxx" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label fw-semibold">Nama Pelanggan</label>
-                                    <input type="text" id="manualNama" class="form-control" placeholder="HPMM / Nama Pelanggan">
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label fw-semibold">Jenis Paket / Produk</label>
-                                    <input type="text" id="manualPaket" class="form-control" placeholder="Contoh: Pulsa 50k / Telkomsel 10GB" required>
-                                </div>
-                                <button type="submit" class="btn btn-purple w-100 mt-2"><i class="fa-solid fa-floppy-disk me-1"></i> Simpan Transaksi</button>
-                            </form>
-                        </div>
-                    </div>
+                
+                <div class="form-group">
+                  <label for="package">Pilih Paket</label>
+                  <select id="package" required>
+                    <option value="" disabled selected>-- Pilih Paket Data --</option>
+                    <option value="PKT01">PKT01 - Paket Hemat 10GB (Rp 25.000)</option>
+                    <option value="PKT02">PKT02 - Paket Extra 25GB (Rp 50.000)</option>
+                    <option value="PKT03">PKT03 - Paket Sultan 50GB (Rp 90.000)</option>
+                  </select>
                 </div>
-            </div>
+              </div>
 
-            <!-- TAB 3: LAPORAN TRANSAKSI -->
-            <div class="tab-pane fade" id="pills-data">
-                <div class="card card-custom p-4">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h5 class="fw-bold m-0" style="color: var(--primary-purple);"><i class="fa-solid fa-clock-rotate-left me-2"></i>Riwayat Transaksi</h5>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table table-hover align-middle table-custom">
-                            <thead class="table-light">
-                                <tr>
-                                    <th>Tanggal & No</th>
-                                    <th>Nomor WA</th>
-                                    <th>Nama</th>
-                                    <th>Produk</th>
-                                    <th>Status</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tableBodyPembeli">
-                                <tr>
-                                    <td colspan="6" class="text-center text-muted">Klik refresh untuk memuat data.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+              <!-- Menu Foto / Scan AI -->
+              <div class="form-group">
+                <label>Scan Nomor HP (AI Foto)</label>
+                <div class="ai-scan-box" onclick="triggerAIScan()">
+                  <span style="font-size: 2rem;">📷</span>
+                  <span style="margin-top: 8px; font-weight: 600; color: var(--primary-dark);">Upload / Ambil Foto</span>
+                  <small style="color: var(--text-muted); font-size: 0.75rem;">AI akan otomatis membaca nomor HP dari gambar</small>
                 </div>
+                <input type="file" id="ai-file-input" accept="image/*" style="display:none" onchange="processAIPhoto()">
+              </div>
             </div>
 
+            <button type="submit" class="btn-buy">BELI SEKARANG</button>
+          </form>
         </div>
-    </div>
+      </section>
 
-    <!-- Script JS & Bootstrap -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // GANTI URL INI DENGAN WEB APP URL DARI GOOGLE APPS SCRIPT ANDA
-        const SCRIPT_URL = "https://orderan.digitalaspal.workers.dev/"; 
+      <!-- MENU 2: LAPORAN -->
+      <section id="tab-laporan" class="tab-panel">
+        <div class="card">
+          <div class="card-title">Laporan Transaksi</div>
+          
+          <!-- Tombol Akses Admin -->
+          <button class="admin-unlock-btn" onclick="unlockAdmin()">🔓 Masukkan PIN Admin (Akses Menu Tagih)</button>
 
-        let lastCreatedID = "";
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Tanggal</th>
+                  <th>Nama</th>
+                  <th>Orderan</th>
+                  <th>Status</th>
+                  <th class="col-tagih">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>19/08/2026</td>
+                  <td>Budi Santoso</td>
+                  <td>PKT02 - 25GB</td>
+                  <td><span class="badge badge-success">Lunas</span></td>
+                  <td class="col-tagih"><button class="btn-tagih" onclick="alert('Tagihan dikirim ke Budi')">TAGIH</button></td>
+                </tr>
+                <tr>
+                  <td>19/08/2026</td>
+                  <td>Siti Rahma</td>
+                  <td>PKT01 - 10GB</td>
+                  <td><span class="badge badge-pending">Belum Bayar</span></td>
+                  <td class="col-tagih"><button class="btn-tagih" onclick="alert('Tagihan dikirim ke Siti')">TAGIH</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
 
-        function toggleLoader(show) {
-            document.getElementById('loader').style.display = show ? 'flex' : 'none';
-        }
+      <!-- MENU 3: PAKET -->
+      <section id="tab-paket" class="tab-panel">
+        <div class="card">
+          <div class="card-title">Daftar Paket Tersedia</div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>KODE PAKET</th>
+                  <th>HARGA</th>
+                  <th>MASA AKTIF</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>PKT01</b></td>
+                  <td>Rp 25.000</td>
+                  <td>7 Hari</td>
+                </tr>
+                <tr>
+                  <td><b>PKT02</b></td>
+                  <td>Rp 50.000</td>
+                  <td>30 Hari</td>
+                </tr>
+                <tr>
+                  <td><b>PKT03</b></td>
+                  <td>Rp 90.000</td>
+                  <td>30 Hari</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
 
-        // 1. Submit Form Order Web
-        document.getElementById('formWebOrder').addEventListener('submit', function(e) {
-            e.preventDefault();
-            toggleLoader(true);
+    </main>
+  </div>
 
-            const nomor = document.getElementById('webNomor').value;
-            const paket = document.getElementById('webPaket').value;
+  <script>
+    // Tab Navigation Logic
+    function switchTab(tabId, element) {
+      document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      
+      document.getElementById('tab-' + tabId).classList.add('active');
+      element.classList.add('active');
+    }
 
-            fetch(`${SCRIPT_URL}?action=create&nomor=${encodeURIComponent(nomor)}&paket=${encodeURIComponent(paket)}`)
-            .then(res => res.json())
-            .then(data => {
-                toggleLoader(false);
-                if(data.result === 'success') {
-                    lastCreatedID = data.id;
-                    document.getElementById('displayID').innerText = data.id;
-                    document.getElementById('displayStatus').innerText = "PENDING";
-                    document.getElementById('displayStatus').className = "status-badge badge-pending";
-                    document.getElementById('orderStatusBox').classList.remove('d-none');
-                    alert("Pesanan berhasil dibuat! Silahkan konfirmasi via admin/Telegram.");
-                }
-            })
-            .catch(err => {
-                toggleLoader(false);
-                alert("Gagal mengirim pesanan: " + err);
-            });
-        });
+    // Simulasi AI Scan Foto
+    function triggerAIScan() {
+      document.getElementById('ai-file-input').click();
+    }
 
-        // 2. Cek Status Order Web
-        function cekStatusOrder() {
-            if(!lastCreatedID) return;
-            toggleLoader(true);
+    function processAIPhoto() {
+      const fileInput = document.getElementById('ai-file-input');
+      if (fileInput.files.length > 0) {
+        alert("AI sedang memproses gambar...");
+        setTimeout(() => {
+          document.getElementById('phone').value = "081234567890"; // Simulasi hasil scan
+          alert("Nomor HP berhasil dideteksi oleh AI!");
+        }, 1000);
+      }
+    }
 
-            fetch(`${SCRIPT_URL}?action=check&id=${encodeURIComponent(lastCreatedID)}`)
-            .then(res => res.json())
-            .then(data => {
-                toggleLoader(false);
-                const badge = document.getElementById('displayStatus');
-                badge.innerText = data.status;
-                if(data.status === "SUCCESS") {
-                    badge.className = "status-badge badge-success";
-                } else {
-                    badge.className = "status-badge badge-pending";
-                }
-            })
-            .catch(err => {
-                toggleLoader(false);
-                alert("Gagal mengecek status: " + err);
-            });
-        }
+    // Submit Form Order
+    function handleOrder(e) {
+      e.preventDefault();
+      alert("Pembelian Berhasil Diproses!");
+    }
 
-        // 3. Submit Transaksi Manual Konter
-        document.getElementById('formManualTrx').addEventListener('submit', function(e) {
-            e.preventDefault();
-            toggleLoader(true);
-
-            const payload = {
-                action: "catat_trx_konter",
-                nomorWA: document.getElementById('manualNomorWA').value,
-                nomorPelanggan: document.getElementById('manualNomorPelanggan').value,
-                nama: document.getElementById('manualNama').value,
-                jenisPaket: document.getElementById('manualPaket').value
-            };
-
-            fetch(SCRIPT_URL, {
-                method: "POST",
-                body: JSON.stringify(payload)
-            })
-            .then(res => res.json())
-            .then(data => {
-                toggleLoader(false);
-                if(data.status === 'success') {
-                    alert(data.message);
-                    document.getElementById('formManualTrx').reset();
-                } else {
-                    alert("Error: " + data.message);
-                }
-            })
-            .catch(err => {
-                toggleLoader(false);
-                alert("Gagal menyimpan transaksi: " + err);
-            });
-        });
-
-        // 4. Load Data Pembeli ke Tabel
-        function loadPembeli() {
-            toggleLoader(true);
-            const pin = document.getElementById('pinAdmin').value;
-
-            fetch(`${SCRIPT_URL}?action=getPembeli&start=0&limit=20&pin=${encodeURIComponent(pin)}`)
-            .then(res => res.json())
-            .then(data => {
-                toggleLoader(false);
-                const tbody = document.getElementById('tableBodyPembeli');
-                tbody.innerHTML = "";
-
-                if(!data.pembeli || data.pembeli.length === 0) {
-                    tbody.innerHTML = `<tr><td colspan="6" class="text-center text-muted">Belum ada data transaksi.</td></tr>`;
-                    return;
-                }
-
-                data.pembeli.forEach(item => {
-                    const isSuccess = (item.status || "").toLowerCase() === 'selesai' || (item.status || "").toLowerCase() === 'success';
-                    const badgeClass = isSuccess ? 'badge-success' : 'badge-pending';
-                    const noWA = item.r ? item.r : `****${item.digit}`;
-
-                    const row = `
-                        <tr>
-                            <td class="fw-semibold">${item.q || '-'}</td>
-                            <td>${noWA}</td>
-                            <td>${item.t || '-'}</td>
-                            <td>${item.v || '-'}</td>
-                            <td><span class="status-badge ${badgeClass}">${item.status || 'Pending'}</span></td>
-                            <td>
-                                ${!isSuccess ? `<button class="btn btn-sm btn-success" onclick="updateStatusSelesai('${noWA}', '${item.q}')"><i class="fa-solid fa-check"></i></button>` : '<i class="fa-solid fa-check-double text-success"></i>'}
-                            </td>
-                        </tr>
-                    `;
-                    tbody.innerHTML += row;
-                });
-            })
-            .catch(err => {
-                toggleLoader(false);
-                alert("Gagal memuat data: " + err);
-            });
-        }
-
-        // 5. Update Status Manual ke Selesai
-        function updateStatusSelesai(nomor, waktu) {
-            if(!confirm("Tandai transaksi ini sebagai Selesai?")) return;
-            toggleLoader(true);
-
-            fetch(`${SCRIPT_URL}?action=updateStatus&nomor=${encodeURIComponent(nomor)}&waktu=${encodeURIComponent(waktu)}&status=Selesai`)
-            .then(res => res.json())
-            .then(data => {
-                toggleLoader(false);
-                if(data.result === 'success') {
-                    loadPembeli();
-                } else {
-                    alert("Gagal mengubah status!");
-                }
-            })
-            .catch(err => {
-                toggleLoader(false);
-                alert("Error: " + err);
-            });
-        }
-    </script>
+    // Lock/Unlock Admin Column (PIN Tagih)
+    function unlockAdmin() {
+      const pin = prompt("Masukkan PIN/Password Admin:");
+      if (pin === "1234") { // Gantilah "1234" dengan PIN pilihan Anda
+        const tagihColumns = document.querySelectorAll('.col-tagih');
+        tagihColumns.forEach(col => col.classList.add('show'));
+        alert("Akses Admin Diberikan. Kolom TAGIH ditampilkan.");
+      } else if (pin !== null) {
+        alert("PIN Salah!");
+      }
+    }
+  </script>
 </body>
 </html>
