@@ -1,2 +1,0 @@
-# order
-transaksi sendiri ya
