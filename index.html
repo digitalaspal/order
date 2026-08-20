@@ -3,749 +3,142 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ARDAF STORE - MAP THEME</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-  <style>
-    /* --- TEMA MAP & NAVIGATION DASHBOARD --- */
-    :root {
-      --bg-app: #f2f5f9;
-      --card-bg: #ffffff;
-      --primary: #3b82f6;            /* Map Blue Navigation */
-      --primary-hover: #2563eb;
-      --primary-soft: #e0edff;       /* Soft Blue Active Tab */
-      --text-main: #0f172a;
-      --text-muted: #64748b;
-      --border-color: #e2e8f0;
-      --input-bg: #f8fafc;
-      --badge-green-bg: #dcfce7;
-      --badge-green-text: #166534;
-      --badge-yellow-bg: #fef9c3;
-      --badge-yellow-text: #854d0e;
-      --sidebar-width: 260px;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-    }
-
-    body {
-      background-color: var(--bg-app);
-      /* Grid Map Pattern Overlay */
-      background-image: 
-        radial-gradient(rgba(59, 130, 246, 0.12) 1px, transparent 1px),
-        radial-gradient(rgba(15, 23, 42, 0.05) 1px, transparent 1px);
-      background-size: 24px 24px;
-      background-position: 0 0, 12px 12px;
-      color: var(--text-main);
-      display: flex;
-      min-height: 100vh;
-    }
-
-    /* --- SIDEBAR --- */
-    aside.sidebar {
-      width: var(--sidebar-width);
-      background-color: var(--card-bg);
-      display: flex;
-      flex-direction: column;
-      padding: 28px 18px;
-      border-right: 1px solid var(--border-color);
-      box-shadow: 4px 0 20px rgba(0, 0, 0, 0.02);
-      z-index: 10;
-    }
-
-    .brand-logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 1.35rem;
-      font-weight: 800;
-      color: var(--primary);
-      margin-bottom: 24px;
-      padding-left: 8px;
-    }
-
-    .brand-icon {
-      width: 36px;
-      height: 36px;
-      background: linear-gradient(135deg, var(--primary), #1d4ed8);
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 1.2rem;
-      box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
-    }
-
-    /* GPS Status Pin Box in Sidebar */
-    .gps-status-card {
-      background: var(--input-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 10px 14px;
-      margin-bottom: 24px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.75rem;
-      font-family: 'JetBrains Mono', monospace;
-      color: var(--text-muted);
-    }
-
-    .gps-dot {
-      width: 8px;
-      height: 8px;
-      background-color: #10b981;
-      border-radius: 50%;
-      box-shadow: 0 0 8px #10b981;
-      animation: blink 1.5s infinite;
-    }
-
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
-    }
-
-    .nav-tabs {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .tab-btn {
-      background: transparent;
-      border: none;
-      padding: 14px 20px;
-      text-align: left;
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      border-radius: 14px;
-      cursor: pointer;
-      transition: all 0.25s ease;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .tab-btn:hover {
-      background-color: var(--bg-app);
-      color: var(--primary);
-    }
-
-    .tab-btn.active {
-      background-color: var(--primary-soft);
-      color: var(--primary);
-      font-weight: 700;
-      border-left: 4px solid var(--primary);
-    }
-
-    /* --- MAIN CONTENT AREA --- */
-    .main-wrapper {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      overflow-x: hidden;
-    }
-
-    .btn-action-primary {
-      background: linear-gradient(135deg, var(--primary), var(--primary-hover));
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 16px;
-      font-weight: 700;
-      font-size: 0.9rem;
-      cursor: pointer;
-      box-shadow: 0 4px 14px rgba(59, 130, 246, 0.35);
-      transition: all 0.2s;
-    }
-
-    .btn-action-primary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 6px 18px rgba(59, 130, 246, 0.45);
-    }
-
-    /* --- CONTENT PANELS --- */
-    .content-container {
-      padding: 28px 32px;
-    }
-
-    .tab-panel {
-      display: none;
-    }
-
-    .tab-panel.active {
-      display: block;
-      animation: fadeInUp 0.3s ease;
-    }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-   /* --- STATS SUMMARY CARDS (PRESISI & OPTIMAL DI MOBILE) --- */
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 8px;
-  margin-bottom: 20px;
-}
-
-.stat-box {
-  background: var(--card-bg);
-  border-radius: 12px;
-  padding: 8px 10px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  border: 1px solid var(--border-color);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
-  position: relative;
-  overflow: hidden;
-  min-width: 0;
-}
-
-.stat-box::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 3px;
-  height: 100%;
-  background: var(--primary);
-}
-
-.stat-icon-wrapper {
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.9rem;
-  flex-shrink: 0;
-}
-
-.stat-icon-purple { background-color: #ede8ff; color: #7c5cfc; }
-.stat-icon-green  { background-color: #dcfce7; color: #166534; }
-.stat-icon-blue   { background-color: #e0f2fe; color: #0284c7; }
-
-.stat-info {
-  min-width: 0;
-  overflow: hidden;
-}
-
-.stat-info .stat-label {
-  font-size: 0.65rem;
-  font-weight: 700;
-  color: var(--text-muted);
-  margin-bottom: 1px;
-  text-transform: uppercase;
-  letter-spacing: 0.2px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.stat-info .stat-value {
-  font-size: 0.85rem;
-  font-weight: 800;
-  color: var(--text-main);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-/* --- KHUSUS LAYAR HP SANGAT KECIL (MAX-WIDTH: 480PX) --- */
-@media (max-width: 480px) {
-  .stats-grid {
-    gap: 4px; /* Gap lebih padat */
-  }
-
-  .stat-box {
-    padding: 6px 4px; /* Padding minimalis */
-    gap: 5px;
-  }
-
-  .stat-icon-wrapper {
-    width: 24px;
-    height: 24px;
-    font-size: 0.75rem; /* Ukuran icon diperkecil */
-    border-radius: 6px;
-  }
-
-  .stat-info .stat-label {
-    font-size: 0.52rem; /* Font label mini */
-  }
-
-  .stat-info .stat-value {
-    font-size: 0.7rem; /* Font angka disesuaikan agar tidak bertabrakan */
-  }
-}
-
-    /* --- CARDS & FORM --- */
-    .dashboard-card {
-      background: var(--card-bg);
-      border-radius: 20px;
-      padding: 28px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
-      border: 1px solid var(--border-color);
-      margin-bottom: 24px;
-    }
-
-    .card-header-title {
-      font-size: 1.2rem;
-      font-weight: 800;
-      color: var(--text-main);
-      margin-bottom: 24px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .card-header-title::before {
-      content: "🎯";
-      font-size: 1.1rem;
-    }
-
-    .order-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      margin-bottom: 20px;
-    }
-
-    .form-group label {
-      font-size: 0.82rem;
-      font-weight: 700;
-      color: var(--text-muted);
-      letter-spacing: 0.5px;
-    }
-
-    input.form-input, select.form-input {
-      width: 100%;
-      padding: 14px 18px;
-      border: 1px solid var(--border-color);
-      background-color: var(--input-bg);
-      border-radius: 12px;
-      font-size: 0.95rem;
-      outline: none;
-      color: var(--text-main);
-      transition: all 0.2s;
-    }
-
-    input.form-input:focus, select.form-input:focus {
-      border-color: var(--primary);
-      background-color: #ffffff;
-      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
-    }
-
-    /* AI Photo Scanner Card Style */
-    .ai-scan-card {
-      border: 2px dashed #cbd5e1;
-      background-color: var(--input-bg);
-      border-radius: 18px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      text-align: center;
-      cursor: pointer;
-      min-height: 180px;
-      transition: all 0.25s;
-    }
-
-    .ai-scan-card:hover {
-      border-color: var(--primary);
-      background-color: var(--primary-soft);
-    }
-
-    .ai-scan-icon {
-      width: 52px;
-      height: 52px;
-      background-color: #ffffff;
-      border-radius: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      margin-bottom: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-    }
-
-    /* --- TABLES --- */
-    .table-responsive {
-      overflow-x: auto;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    th {
-      text-align: left;
-      padding: 16px;
-      font-size: 0.78rem;
-      font-weight: 700;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      border-bottom: 1px solid var(--border-color);
-      background-color: var(--input-bg);
-    }
-
-    td {
-      padding: 16px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      border-bottom: 1px solid var(--border-color);
-      color: var(--text-main);
-    }
-
-    tr:last-child td {
-      border-bottom: none;
-    }
-
-    .status-badge {
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 0.78rem;
-      font-weight: 700;
-      display: inline-block;
-    }
-
-    .status-badge.success {
-      background-color: var(--badge-green-bg);
-      color: var(--badge-green-text);
-    }
-
-    .status-badge.pending {
-      background-color: var(--badge-yellow-bg);
-      color: var(--badge-yellow-text);
-    }
-
-    /* Admin Action Button */
-    .btn-admin-unlock {
-      background-color: var(--input-bg);
-      color: var(--primary);
-      border: 1px solid var(--border-color);
-      padding: 10px 18px;
-      border-radius: 12px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      cursor: pointer;
-      margin-bottom: 20px;
-      transition: all 0.2s;
-    }
-
-    .btn-admin-unlock:hover {
-      background-color: var(--primary-soft);
-    }
-
-    .col-tagih {
-      display: none;
-    }
-
-    .col-tagih.show {
-      display: table-cell;
-    }
-
-    .btn-tagih-action {
-      background-color: #ef4444;
-      color: white;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 10px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(239, 68, 68, 0.25);
-    }
-
-    /* --- RESPONSIVE MOBILE --- */
-    @media (max-width: 600px) {
-      body {
-        flex-direction: column;
-      }
-
-      aside.sidebar {
-        width: 100%;
-        border-right: none;
-        border-bottom: 1px solid var(--border-color);
-        padding: 16px;
-      }
-
-      .brand-logo {
-        margin-bottom: 16px;
-      }
-
-      .nav-tabs {
-        flex-direction: row;
-      }
-
-      .tab-btn {
-        flex: 1;
-        justify-content: center;
-        padding: 10px;
-        font-size: 0.85rem;
-      }
-
-      .order-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .content-container {
-        padding: 16px;
-      }
-    }
-  </style>
+  <title>ARDAF STORE - Konter Pulsa & Data</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body oncontextmenu="return false;">
 
-  <!-- SIDEBAR NAVIGATION -->
-  <aside class="sidebar">
-    <div class="brand-logo">
-      <div class="brand-icon">🗺️</div>
-      ARDAF STORE
-    </div>
+  <div class="container">
+    
+    <!-- LAYER 1: FORM PEMBELIAN ONLINE -->
+    <div id="layer-1" class="card">
+      <h2>⚡ BELI ONLINE ARDAF STORE</h2>
+      <p class="subtitle">Isi ulang pulsa & paket data instan, cepat, dan terpercaya.</p>
 
-    <!-- GPS Connection Radar Indicator -->
-    <div class="gps-status-card">
-      <div class="gps-dot"></div>
-      <span>PENJUAL: AKTIF</span>
-    </div>
-
-    <nav class="nav-tabs">
-      <button class="tab-btn active" onclick="switchTab('order', this)">
-        <span>🛒</span> ORDER
-      </button>
-      <button class="tab-btn" onclick="switchTab('paket', this)">
-        <span>📦</span> PAKET
-      </button>
-      <button class="tab-btn" onclick="switchTab('laporan', this)">
-        <span>📊</span> LAPORAN
-      </button>
-    </nav>
-  </aside>
-
-  <!-- MAIN WRAPPER -->
-  <div class="main-wrapper">
-
-    <!-- CONTENT CONTAINER -->
-    <main class="content-container">
-
-      <!-- BOX RINGKASAN STATISTIK (DITARUH DI PALING ATAS BERJEJER 3) -->
-      <div class="stats-grid">
-        <div class="stat-box">
-          <div class="stat-icon-wrapper stat-icon-purple">💰</div>
-          <div class="stat-info">
-            <div class="stat-label">Total Penjualan</div>
-            <div class="stat-value">Rp 12.450.000</div>
-          </div>
-        </div>
-
-        <div class="stat-box">
-          <div class="stat-icon-wrapper stat-icon-green">📈</div>
-          <div class="stat-info">
-            <div class="stat-label">Total Hari Ini</div>
-            <div class="stat-value">Rp 850.000</div>
-          </div>
-        </div>
-
-        <div class="stat-box">
-          <div class="stat-icon-wrapper stat-icon-blue">📦</div>
-          <div class="stat-info">
-            <div class="stat-label">Stok Hari Ini</div>
-            <div class="stat-value">142 Pcs</div>
-          </div>
+      <div class="form-group">
+        <label>Nomor HP Pelanggan</label>
+        <div class="input-with-btn">
+          <input type="tel" id="nomor-hp" placeholder="08xxx" maxlength="14" autocomplete="off">
+          <button type="button" class="btn-sec" id="btn-foto">📷 FOTO NOMOR</button>
         </div>
       </div>
 
-      <!-- MENU 1: ORDER -->
-      <section id="tab-order" class="tab-panel active">
-        <div class="dashboard-card">
-          <div class="card-header-title">BUAT ORDERAN</div>
-          <form onsubmit="handleOrder(event)">
-            <div class="order-grid">
-              
-              <!-- Left Column Form -->
-              <div>
-                <div class="form-group">
-                  <label for="phone">NOMOR HP PEMBELI</label>
-                  <input type="tel" id="phone" class="form-input" placeholder="08xxxxxxxxxx" required>
-                </div>
+      <div class="form-group">
+        <label>Pilih Paket</label>
+        <select id="select-paket">
+          <option value="">-- Memuat Paket... --</option>
+        </select>
+        <input type="text" id="paket-manual" class="hidden" placeholder="Ketik jenis paket/layanan lain...">
+        <button type="button" class="btn-toggle" id="btn-toggle-paket">✏️ Paket Lain / Manual</button>
+      </div>
 
-                <div class="form-group">
-                  <label for="package">PILIH PAKET</label>
-                  <select id="package" class="form-input" required>
-                    <option value="" disabled selected>-- Choose Package --</option>
-                    <option value="PKT01">PKT01 - Paket Hemat 10GB (Rp 25.000)</option>
-                    <option value="PKT02">PKT02 - Paket Extra 25GB (Rp 50.000)</option>
-                    <option value="PKT03">PKT03 - Paket Sultan 50GB (Rp 90.000)</option>
-                  </select>
-                </div>
-              </div>
+      <button id="btn-beli" class="btn-primary">BELI SEKARANG</button>
+    </div>
 
-              <!-- Right Column AI Photo Scanner -->
-              <div class="form-group">
-                <label>Scan Phone Number (AI Photo)</label>
-                <div class="ai-scan-card" onclick="triggerAIScan()">
-                  <div class="ai-scan-icon">📷</div>
-                  <strong style="color: var(--text-main); font-size: 0.95rem;">Upload Photo / Scan</strong>
-                  <span style="color: var(--text-muted); font-size: 0.8rem; margin-top: 4px;">AI will automatically extract phone numbers</span>
-                </div>
-                <input type="file" id="ai-file-input" accept="image/*" style="display:none" onchange="processAIPhoto()">
-              </div>
+    <!-- LAYER 2: PROSES STATUS -->
+    <div id="layer-2" class="card hidden text-center">
+      <div class="spinner"></div>
+      <h3>MEMPROSES PESANAN...</h3>
+      <p>Mohon tunggu sebentar, sistem sedang memverifikasi transaksi Anda.</p>
+    </div>
 
-            </div>
+    <!-- LAYER 3: STRUK TRANSACTION -->
+    <div id="layer-3" class="card hidden text-center">
+      <div class="badge-success">✓ BERHASIL</div>
+      <h3>STRUK TRANSAKSI</h3>
+      <div class="struk-box">
+        <p><strong>ID Transaksi:</strong> <span id="struk-id">-</span></p>
+        <p><strong>Nomor HP:</strong> <span id="struk-nomor">-</span></p>
+        <p><strong>Paket Data:</strong> <span id="struk-paket">-</span></p>
+        <p><strong>Status:</strong> <span class="text-green">SUKSES</span></p>
+      </div>
+      <button id="btn-reset" class="btn-primary">Selesai / Transaksi Baru</button>
+    </div>
 
-            <button type="submit" class="btn-action-primary" style="width: 100%; padding: 16px; margin-top: 10px; font-size: 1rem;">
-              Beli Sekarang
-            </button>
-          </form>
-        </div>
-      </section>
+    <!-- SECTION LAPORAN HARI INI -->
+    <div class="card margin-top">
+      <div class="header-laporan">
+        <h3>🔥 Laporan Hari Ini <span class="badge-live">LIVE</span></h3>
+      </div>
 
-      <!-- MENU 2: PAKET -->
-      <section id="tab-paket" class="tab-panel">
-        <div class="dashboard-card">
-          <div class="card-header-title">Daftar Paket Data</div>
-          <div class="table-responsive">
-            <table>
-              <thead>
-                <tr>
-                  <th>Kode Paket</th>
-                  <th>Harga</th>
-                  <th>Masa Aktif</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><b style="color: var(--primary);">PKT01</b></td>
-                  <td>Rp 25.000</td>
-                  <td>7 Hari</td>
-                </tr>
-                <tr>
-                  <td><b style="color: var(--primary);">PKT02</b></td>
-                  <td>Rp 50.000</td>
-                  <td>30 Hari</td>
-                </tr>
-                <tr>
-                  <td><b style="color: var(--primary);">PKT03</b></td>
-                  <td>Rp 90.000</td>
-                  <td>30 Hari</td>
-                </tr>
-              </tbody>
-            </table>
+      <!-- FORM CATAT TRANSAKSI MANUAL (KASIR) -->
+      <div class="kasir-box">
+        <h4>Catat Transaksi Konter (Kasir)</h4>
+        <div class="form-grid">
+          <div class="form-group">
+            <input type="text" id="kasir-id" placeholder="Nomor / ID Pelanggan">
+            <button type="button" id="btn-toggle-kasir-mode" class="btn-mini">Mode: Teks</button>
+          </div>
+          <div class="form-group">
+            <select id="kasir-tipe">
+              <option value="PULSA">PULSA</option>
+              <option value="PAKETDATA">PAKETDATA</option>
+              <option value="LISTRIK">LISTRIK</option>
+              <option value="PDAM">PDAM</option>
+              <option value="GAME">GAME</option>
+              <option value="TOPUP">TOPUP</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <select id="kasir-status">
+              <option value="Selesai">Selesai</option>
+              <option value="Pending">Pending</option>
+            </select>
           </div>
         </div>
-      </section>
+        <button id="btn-simpan-kasir" class="btn-sec full-width">⚡ SIMPAN</button>
+      </div>
 
-      <!-- MENU 3: LAPORAN -->
-      <section id="tab-laporan" class="tab-panel">
-        <div class="dashboard-card">
-          <div class="card-header-title">Laporan Transaksi</div>
+      <!-- TABEL LAPORAN -->
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th id="th-nomor" title="Double Click untuk Mode Admin">NOMOR</th>
+              <th>TIPE</th>
+              <th>STATUS</th>
+              <th id="th-tagih" class="hidden">TAGIH</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-laporan">
+            <tr><td colspan="4" class="text-center">Memuat data...</td></tr>
+          </tbody>
+        </table>
+      </div>
 
-          <!-- Admin Unlock Button -->
-          <button class="btn-admin-unlock" onclick="unlockAdmin()">🔓 Masukkan PIN Admin (Tampilkan Column Tagih)</button>
+      <div class="pagination-box">
+        <button id="btn-prev" class="btn-mini">◀ Sebelumnya</button>
+        <button id="btn-next" class="btn-mini">Berikutnya ▶</button>
+      </div>
+    </div>
 
-          <div class="table-responsive">
-            <table>
-              <thead>
-                <tr>
-                  <th>Tanggal</th>
-                  <th>Nama</th>
-                  <th>Orderan</th>
-                  <th>Status</th>
-                  <th class="col-tagih">Tagih</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>19/08/2026</td>
-                  <td>Budi Santoso</td>
-                  <td>PKT02 - 25GB</td>
-                  <td><span class="status-badge success">Lunas</span></td>
-                  <td class="col-tagih">
-                    <button class="btn-tagih-action" onclick="alert('Tagihan dikirim ke Budi')">TAGIH</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>19/08/2026</td>
-                  <td>Siti Rahma</td>
-                  <td>PKT01 - 10GB</td>
-                  <td><span class="status-badge pending">Belum Bayar</span></td>
-                  <td class="col-tagih">
-                    <button class="btn-tagih-action" onclick="alert('Tagihan dikirim ke Siti')">TAGIH</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-      
-    </main>
   </div>
 
-  <script>
-    // Tab Switching Mechanism
-    function switchTab(tabId, element) {
-      document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
-      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-      
-      document.getElementById('tab-' + tabId).classList.add('active');
-      if(element) element.classList.add('active');
-    }
+  <!-- MODAL CAMERA OCR -->
+  <div id="modal-camera" class="modal hidden">
+    <div class="modal-content">
+      <h3>Scan Nomor HP</h3>
+      <div class="camera-box">
+        <video id="webcam" autoplay playsinline></video>
+        <div class="bounding-box"></div>
+      </div>
+      <canvas id="ocr-canvas" class="hidden"></canvas>
+      <div class="modal-actions">
+        <button id="btn-capture" class="btn-primary">AMBIL FOTO</button>
+        <button id="btn-close-cam" class="btn-sec">BATAL</button>
+      </div>
+    </div>
+  </div>
 
-    // AI Scan Simulation
-    function triggerAIScan() {
-      document.getElementById('ai-file-input').click();
-    }
+  <!-- MODAL SELEKSI NOMOR -->
+  <div id="modal-select-nomor" class="modal hidden">
+    <div class="modal-content">
+      <h3>Pilih Nomor HP Terdeteksi</h3>
+      <div id="list-nomor-select" class="number-list"></div>
+      <button id="btn-close-select" class="btn-sec margin-top">Batal</button>
+    </div>
+  </div>
 
-    function processAIPhoto() {
-      const fileInput = document.getElementById('ai-file-input');
-      if (fileInput.files.length > 0) {
-        alert("AI sedang memproses gambar...");
-        setTimeout(() => {
-          document.getElementById('phone').value = "081234567890";
-          alert("Nomor HP berhasil dibaca AI: 081234567890");
-        }, 800);
-      }
-    }
-
-    // Handle Order Submit
-    function handleOrder(e) {
-      e.preventDefault();
-      alert("Order berhasil dibuat!");
-    }
-
-    // Unlock Admin Tagih Column
-    function unlockAdmin() {
-      const pin = prompt("Masukkan PIN/Password Admin:");
-      if (pin === "1234") { // Default PIN
-        const tagihCols = document.querySelectorAll('.col-tagih');
-        tagihCols.forEach(col => col.classList.add('show'));
-        alert("Akses Admin Diberikan. Kolom TAGIH berhasil ditampilkan.");
-      } else if (pin !== null) {
-        alert("PIN Admin Salah!");
-      }
-    }
-  </script>
+  <script src="js/app.js"></script>
 </body>
 </html>
