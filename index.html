@@ -3,26 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ARDAF STORE</title>
+  <title>ARDAF STORE - MAP THEME</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
   <style>
-    /* --- TEMA TASKORA MODERN SAAS DASHBOARD --- */
+    /* --- TEMA MAP & NAVIGATION DASHBOARD --- */
     :root {
-      --bg-app: #f4f5f9;
+      --bg-app: #f2f5f9;
       --card-bg: #ffffff;
-      --primary: #7c5cfc;            /* Purple Vibrant Accent */
-      --primary-hover: #6941f2;
-      --primary-soft: #ede8ff;       /* Soft Purple Active Tab */
-      --text-main: #1e2022;
-      --text-muted: #838e9e;
-      --border-color: #f0f1f5;
-      --input-bg: #f8f9fc;
-      --badge-green-bg: #e6f9f0;
-      --badge-green-text: #10b981;
-      --badge-yellow-bg: #fff8e6;
-      --badge-yellow-text: #f59e0b;
+      --primary: #3b82f6;            /* Map Blue Navigation */
+      --primary-hover: #2563eb;
+      --primary-soft: #e0edff;       /* Soft Blue Active Tab */
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --border-color: #e2e8f0;
+      --input-bg: #f8fafc;
+      --badge-green-bg: #dcfce7;
+      --badge-green-text: #166534;
+      --badge-yellow-bg: #fef9c3;
+      --badge-yellow-text: #854d0e;
       --sidebar-width: 260px;
     }
 
@@ -35,46 +35,17 @@
 
     body {
       background-color: var(--bg-app);
+      /* Grid Map Pattern Overlay */
+      background-image: 
+        radial-gradient(rgba(59, 130, 246, 0.12) 1px, transparent 1px),
+        radial-gradient(rgba(15, 23, 42, 0.05) 1px, transparent 1px);
+      background-size: 24px 24px;
+      background-position: 0 0, 12px 12px;
       color: var(--text-main);
       display: flex;
       min-height: 100vh;
     }
 
-    /* --- LOADING 3 TITIK COLORFUL --- */
-    .dots-loader {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 10px;
-    }
-
-    .dots-loader span {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      animation: colorfulPulse 1.2s infinite ease-in-out both;
-    }
-
-    .dots-loader span:nth-child(1) { animation-name: pulsePurple; animation-delay: -0.32s; background-color: #7c5cfc; }
-    .dots-loader span:nth-child(2) { animation-name: pulseGreen; animation-delay: -0.16s; background-color: #10b981; }
-    .dots-loader span:nth-child(3) { animation-name: pulseOrange; animation-delay: 0s; background-color: #f59e0b; }
-
-    @keyframes pulsePurple {
-      0%, 80%, 100% { transform: scale(0.6); opacity: 0.3; box-shadow: 0 0 0 rgba(124, 92, 252, 0); }
-      40% { transform: scale(1.3); opacity: 1; box-shadow: 0 0 12px rgba(124, 92, 252, 0.8); }
-    }
-
-    @keyframes pulseGreen {
-      0%, 80%, 100% { transform: scale(0.6); opacity: 0.3; box-shadow: 0 0 0 rgba(16, 185, 129, 0); }
-      40% { transform: scale(1.3); opacity: 1; box-shadow: 0 0 12px rgba(16, 185, 129, 0.8); }
-    }
-
-    @keyframes pulseOrange {
-      0%, 80%, 100% { transform: scale(0.6); opacity: 0.3; box-shadow: 0 0 0 rgba(245, 158, 11, 0); }
-      40% { transform: scale(1.3); opacity: 1; box-shadow: 0 0 12px rgba(245, 158, 11, 0.8); }
-    }
-    
     /* --- SIDEBAR --- */
     aside.sidebar {
       width: var(--sidebar-width);
@@ -83,6 +54,8 @@
       flex-direction: column;
       padding: 28px 18px;
       border-right: 1px solid var(--border-color);
+      box-shadow: 4px 0 20px rgba(0, 0, 0, 0.02);
+      z-index: 10;
     }
 
     .brand-logo {
@@ -92,20 +65,50 @@
       font-size: 1.35rem;
       font-weight: 800;
       color: var(--primary);
-      margin-bottom: 36px;
+      margin-bottom: 24px;
       padding-left: 8px;
     }
 
     .brand-icon {
-      width: 32px;
-      height: 32px;
-      background: var(--primary);
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, var(--primary), #1d4ed8);
       border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: white;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
+    }
+
+    /* GPS Status Pin Box in Sidebar */
+    .gps-status-card {
+      background: var(--input-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 10px 14px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.75rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text-muted);
+    }
+
+    .gps-dot {
+      width: 8px;
+      height: 8px;
+      background-color: #10b981;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #10b981;
+      animation: blink 1.5s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
     }
 
     .nav-tabs {
@@ -139,6 +142,7 @@
       background-color: var(--primary-soft);
       color: var(--primary);
       font-weight: 700;
+      border-left: 4px solid var(--primary);
     }
 
     /* --- MAIN CONTENT AREA --- */
@@ -150,7 +154,7 @@
     }
 
     .btn-action-primary {
-      background-color: var(--primary);
+      background: linear-gradient(135deg, var(--primary), var(--primary-hover));
       color: white;
       border: none;
       padding: 10px 20px;
@@ -158,13 +162,13 @@
       font-weight: 700;
       font-size: 0.9rem;
       cursor: pointer;
-      box-shadow: 0 4px 12px rgba(124, 92, 252, 0.3);
+      box-shadow: 0 4px 14px rgba(59, 130, 246, 0.35);
       transition: all 0.2s;
     }
 
     .btn-action-primary:hover {
-      background-color: var(--primary-hover);
       transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(59, 130, 246, 0.45);
     }
 
     /* --- CONTENT PANELS --- */
@@ -186,83 +190,83 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-/* --- STATS SUMMARY CARDS (3 BOX BERJEJER RAMPING & COMPACT) --- */
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px; /* Dikecilkan dari 16px */
-  margin-bottom: 20px;
-}
+    /* --- STATS SUMMARY CARDS (SELALU BERJEJER 3 KOLOM DI SEMUA UKURAN LAYAR) --- */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      margin-bottom: 20px;
+    }
 
-.stat-box {
-  background: var(--card-bg, #ffffff);
-  border-radius: 14px; /* Dikecilkan dari 20px */
-  padding: 10px 14px;  /* Dikecilkan dari 18px 20px */
-  display: flex;
-  align-items: center;
-  gap: 10px;           /* Dikecilkan dari 14px */
-  border: 1px solid var(--border-color, #f0f1f5);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.02);
-  min-width: 0;
-}
+    .stat-box {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 8px 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
+      position: relative;
+      overflow: hidden;
+      min-width: 0;
+    }
 
-.stat-box:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
-}
+    .stat-box::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 100%;
+      background: var(--primary);
+    }
 
-.stat-icon-wrapper {
-  width: 36px;         /* Dikecilkan dari 48px */
-  height: 36px;        /* Dikecilkan dari 48px */
-  border-radius: 10px; /* Dikecilkan dari 14px */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1rem;     /* Dikecilkan dari 1.3rem */
-  flex-shrink: 0;
-}
+    .stat-icon-wrapper {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
 
-.stat-icon-purple { background-color: #ede8ff; color: #7c5cfc; }
-.stat-icon-green  { background-color: #e6f9f0; color: #10b981; }
-.stat-icon-blue   { background-color: #e0f2fe; color: #0284c7; }
+    .stat-icon-purple { background-color: #ede8ff; color: #7c5cfc; }
+    .stat-icon-green  { background-color: #dcfce7; color: #166534; }
+    .stat-icon-blue   { background-color: #e0f2fe; color: #0284c7; }
 
-.stat-info {
-  min-width: 0;
-  overflow: hidden;
-}
+    .stat-info {
+      min-width: 0;
+      overflow: hidden;
+    }
 
-.stat-info .stat-label {
-  font-size: 0.7rem;   /* Dikecilkan dari 0.78rem */
-  font-weight: 700;
-  color: var(--text-muted, #838e9e);
-  margin-bottom: 1px;
-  text-transform: uppercase;
-  letter-spacing: 0.3px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+    .stat-info .stat-label {
+      font-size: 0.62rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 1px;
+      text-transform: uppercase;
+      letter-spacing: 0.2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
 
-.stat-info .stat-value {
-  font-size: 1rem;     /* Dikecilkan dari 1.25rem */
-  font-weight: 800;
-  color: var(--text-main, #1e2022);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-/* Tetap berjejer di layar sedang, baru turun di layar ponsel yang sangat kecil */
-@media (max-width: 600px) {
-  .stats-grid {
-    grid-template-columns: 1fr;
-  }
-}
+    .stat-info .stat-value {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--text-main);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
 
     /* --- CARDS & FORM --- */
     .dashboard-card {
       background: var(--card-bg);
-      border-radius: 24px;
+      border-radius: 20px;
       padding: 28px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
       border: 1px solid var(--border-color);
@@ -270,10 +274,18 @@
     }
 
     .card-header-title {
-      font-size: 1.25rem;
-      font-weight: 700;
+      font-size: 1.2rem;
+      font-weight: 800;
       color: var(--text-main);
       margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card-header-title::before {
+      content: "🎯";
+      font-size: 1.1rem;
     }
 
     .order-grid {
@@ -290,9 +302,10 @@
     }
 
     .form-group label {
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       font-weight: 700;
       color: var(--text-muted);
+      letter-spacing: 0.5px;
     }
 
     input.form-input, select.form-input {
@@ -300,7 +313,7 @@
       padding: 14px 18px;
       border: 1px solid var(--border-color);
       background-color: var(--input-bg);
-      border-radius: 14px;
+      border-radius: 12px;
       font-size: 0.95rem;
       outline: none;
       color: var(--text-main);
@@ -310,14 +323,14 @@
     input.form-input:focus, select.form-input:focus {
       border-color: var(--primary);
       background-color: #ffffff;
-      box-shadow: 0 0 0 4px rgba(124, 92, 252, 0.1);
+      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
     }
 
     /* AI Photo Scanner Card Style */
     .ai-scan-card {
-      border: 2px dashed #d1d5db;
+      border: 2px dashed #cbd5e1;
       background-color: var(--input-bg);
-      border-radius: 20px;
+      border-radius: 18px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -335,8 +348,8 @@
     }
 
     .ai-scan-icon {
-      width: 50px;
-      height: 50px;
+      width: 52px;
+      height: 52px;
       background-color: #ffffff;
       border-radius: 16px;
       display: flex;
@@ -344,55 +357,7 @@
       justify-content: center;
       font-size: 1.5rem;
       margin-bottom: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    }
-
-    /* --- MAP / LOCATION WIDGET STYLE --- */
-    .map-picker-card {
-      border: 1px solid var(--border-color);
-      background-color: var(--input-bg);
-      border-radius: 16px;
-      padding: 14px 18px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .map-picker-card:hover {
-      border-color: var(--primary);
-      background-color: #ffffff;
-      box-shadow: 0 4px 12px rgba(124, 92, 252, 0.08);
-    }
-
-    .map-info {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .map-icon {
-      width: 40px;
-      height: 40px;
-      background-color: var(--primary-soft);
-      color: var(--primary);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-    }
-
-    .map-text strong {
-      display: block;
-      font-size: 0.9rem;
-      color: var(--text-main);
-    }
-
-    .map-text span {
-      font-size: 0.78rem;
-      color: var(--text-muted);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
     }
 
     /* --- TABLES --- */
@@ -408,17 +373,18 @@
     th {
       text-align: left;
       padding: 16px;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: 700;
       color: var(--text-muted);
       text-transform: uppercase;
       letter-spacing: 0.5px;
       border-bottom: 1px solid var(--border-color);
+      background-color: var(--input-bg);
     }
 
     td {
-      padding: 18px 16px;
-      font-size: 0.92rem;
+      padding: 16px;
+      font-size: 0.9rem;
       font-weight: 600;
       border-bottom: 1px solid var(--border-color);
       color: var(--text-main);
@@ -431,7 +397,7 @@
     .status-badge {
       padding: 6px 14px;
       border-radius: 20px;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: 700;
       display: inline-block;
     }
@@ -452,7 +418,7 @@
       color: var(--primary);
       border: 1px solid var(--border-color);
       padding: 10px 18px;
-      border-radius: 14px;
+      border-radius: 12px;
       font-size: 0.85rem;
       font-weight: 700;
       cursor: pointer;
@@ -473,19 +439,19 @@
     }
 
     .btn-tagih-action {
-      background-color: #ff4d4d;
+      background-color: #ef4444;
       color: white;
       border: none;
       padding: 8px 16px;
-      border-radius: 12px;
+      border-radius: 10px;
       font-size: 0.8rem;
       font-weight: 700;
       cursor: pointer;
-      box-shadow: 0 4px 10px rgba(255, 77, 77, 0.25);
+      box-shadow: 0 4px 10px rgba(239, 68, 68, 0.25);
     }
 
     /* --- RESPONSIVE MOBILE --- */
-    @media (max-width: 900px) {
+    @media (max-width: 600px) {
       body {
         flex-direction: column;
       }
@@ -512,10 +478,6 @@
         font-size: 0.85rem;
       }
 
-      .stats-grid {
-        grid-template-columns: 1fr;
-      }
-
       .order-grid {
         grid-template-columns: 1fr;
       }
@@ -531,8 +493,14 @@
   <!-- SIDEBAR NAVIGATION -->
   <aside class="sidebar">
     <div class="brand-logo">
-      <div class="brand-icon">✓</div>
+      <div class="brand-icon">🗺️</div>
       ARDAF STORE
+    </div>
+
+    <!-- GPS Connection Radar Indicator -->
+    <div class="gps-status-card">
+      <div class="gps-dot"></div>
+      <span>GPS SATELLITE: ACTIVE</span>
     </div>
 
     <nav class="nav-tabs">
@@ -554,7 +522,7 @@
     <!-- CONTENT CONTAINER -->
     <main class="content-container">
 
-      <!-- BOX RINGKASAN STATISTIK (DITARUH DI PALING ATAS) -->
+      <!-- BOX RINGKASAN STATISTIK (DITARUH DI PALING ATAS BERJEJER 3) -->
       <div class="stats-grid">
         <div class="stat-box">
           <div class="stat-icon-wrapper stat-icon-purple">💰</div>
@@ -603,21 +571,6 @@
                     <option value="PKT02">PKT02 - Paket Extra 25GB (Rp 50.000)</option>
                     <option value="PKT03">PKT03 - Paket Sultan 50GB (Rp 90.000)</option>
                   </select>
-                </div>
-
-                <!-- Pilihan Lokasi / Map -->
-                <div class="form-group">
-                  <label>LOKASI PENGIRIMAN</label>
-                  <div class="map-picker-card" onclick="getLocation()">
-                    <div class="map-info">
-                      <div class="map-icon">📍</div>
-                      <div class="map-text">
-                        <strong id="location-name">Pilih Lokasi di Peta</strong>
-                        <span id="location-coords">Klik untuk deteksi GPS otomatis</span>
-                      </div>
-                    </div>
-                    <span style="color: var(--primary); font-weight: 700;">📍 Map</span>
-                  </div>
                 </div>
               </div>
 
@@ -746,28 +699,6 @@
           document.getElementById('phone').value = "081234567890";
           alert("Nomor HP berhasil dibaca AI: 081234567890");
         }, 800);
-      }
-    }
-
-    // GPS/Map Auto-detect Location Simulation
-    function getLocation() {
-      const locName = document.getElementById('location-name');
-      const locCoords = document.getElementById('location-coords');
-      
-      locName.innerText = "Mendeteksi Lokasi...";
-      locCoords.innerText = "Mengambil data GPS...";
-
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition((position) => {
-          locName.innerText = "Lokasi Terdeteksi";
-          locCoords.innerText = `Lat: ${position.coords.latitude.toFixed(4)}, Long: ${position.coords.longitude.toFixed(4)}`;
-        }, () => {
-          locName.innerText = "Jakarta, Indonesia";
-          locCoords.innerText = "Lat: -6.2088, Long: 106.8456 (Default)";
-        });
-      } else {
-        locName.innerText = "Lokasi Manual";
-        locCoords.innerText = "GPS tidak didukung browser ini";
       }
     }
 
