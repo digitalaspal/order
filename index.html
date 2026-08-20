@@ -534,19 +534,19 @@
       <!-- MENU 1: ORDER -->
       <section id="tab-order" class="tab-panel active">
         <div class="dashboard-card">
-          <div class="card-header-title">Create New Order</div>
+          <div class="card-header-title">BUAT ORDERAN</div>
           <form onsubmit="handleOrder(event)">
             <div class="order-grid">
               
               <!-- Left Column Form -->
               <div>
                 <div class="form-group">
-                  <label for="phone">Customer Phone Number</label>
+                  <label for="phone">NOMOR HP PEMBELI</label>
                   <input type="tel" id="phone" class="form-input" placeholder="08xxxxxxxxxx" required>
                 </div>
 
                 <div class="form-group">
-                  <label for="package">Select Data Package</label>
+                  <label for="package">PILIH PAKET</label>
                   <select id="package" class="form-input" required>
                     <option value="" disabled selected>-- Choose Package --</option>
                     <option value="PKT01">PKT01 - Paket Hemat 10GB (Rp 25.000)</option>
@@ -654,25 +654,34 @@
           </div>
         </div>
       </section>
-<!-- BOX TOTAL PENJUALAN & TOTAL HARI INI -->
-      <div class="stats-grid">
-        <div class="stat-box">
-          <div class="stat-icon-wrapper stat-icon-purple">💰</div>
-          <div class="stat-info">
-            <div class="stat-label">BULAN INI</div>
-            <div class="stat-value">300 ORDER</div>
-            <div class="dots-loader"><span></span><span></span><span></span></div>
-          </div>
-        </div>
 
-        <div class="stat-box">
-          <div class="stat-icon-wrapper stat-icon-green">📈</div>
-          <div class="stat-info">
-            <div class="stat-label">HARI INI</div>
-            <div class="stat-value">20 ORDER</div>
-          </div>
-        </div>
-      </div>
+      <!-- BOX RINGKASAN STATISTIK (3 BOX) -->
+<div class="stats-grid">
+  <div class="stat-box">
+    <div class="stat-icon-wrapper stat-icon-purple">💰</div>
+    <div class="stat-info">
+      <div class="stat-label">Total Penjualan</div>
+      <div class="stat-value">Rp 12.450.000</div>
+    </div>
+  </div>
+
+  <div class="stat-box">
+    <div class="stat-icon-wrapper stat-icon-green">📈</div>
+    <div class="stat-info">
+      <div class="stat-label">Total Hari Ini</div>
+      <div class="stat-value">Rp 850.000</div>
+    </div>
+  </div>
+
+  <div class="stat-box">
+    <div class="stat-icon-wrapper stat-icon-blue">📦</div>
+    <div class="stat-info">
+      <div class="stat-label">Stok Hari Ini</div>
+      <div class="stat-value">142 Pcs</div>
+    </div>
+  </div>
+</div>
+      
     </main>
   </div>
 
