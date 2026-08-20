@@ -1,144 +1,310 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ARDAF STORE - Konter Pulsa & Data</title>
-  <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Order Pulsa - Timeline Style</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: #0f172a;
+            display: flex;
+            justify-content: center;
+        }
+
+        .mobile-container {
+            width: 100%;
+            max-width: 480px;
+            background-color: #ffffff;
+            min-height: 100vh;
+            padding-bottom: 90px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        header {
+            padding: 20px;
+            background: #ffffff;
+            border-bottom: 1px solid #f1f5f9;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 20px;
+            color: #2563eb;
+            letter-spacing: -0.5px;
+        }
+
+        /* Container Timeline */
+        .timeline {
+            position: relative;
+            padding: 24px 20px;
+        }
+
+        /* Garis Timeline Vertikal */
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 35px;
+            bottom: 40px;
+            width: 2px;
+            background: #e2e8f0;
+            z-index: 1;
+        }
+
+        .step-item {
+            position: relative;
+            display: flex;
+            gap: 16px;
+            margin-bottom: 28px;
+            z-index: 2;
+        }
+
+        .step-node {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: #ffffff;
+            border: 2px solid #cbd5e1;
+            color: #64748b;
+            font-size: 14px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.2s;
+        }
+
+        .step-item.active .step-node {
+            background-color: #2563eb;
+            border-color: #2563eb;
+            color: #ffffff;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+        }
+
+        .step-content {
+            flex: 1;
+            padding-top: 4px;
+        }
+
+        .step-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 12px;
+        }
+
+        /* Component Inputs */
+        .input-box {
+            position: relative;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 12px 14px;
+            font-size: 15px;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 10px;
+            outline: none;
+            background: #f8fafc;
+        }
+
+        .input-field:focus {
+            border-color: #2563eb;
+            background: #fff;
+        }
+
+        .operator-badge {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 11px;
+            font-weight: 700;
+            background-color: #dbeafe;
+            color: #1e40af;
+            padding: 4px 8px;
+            border-radius: 6px;
+        }
+
+        /* Option Grids */
+        .nominal-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .card-option {
+            border: 1.5px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 12px;
+            cursor: pointer;
+            background: #fff;
+            transition: all 0.2s;
+        }
+
+        .card-option.selected {
+            border-color: #2563eb;
+            background-color: #eff6ff;
+        }
+
+        .option-val {
+            font-size: 16px;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .option-price {
+            font-size: 12px;
+            color: #64748b;
+            margin-top: 2px;
+        }
+
+        /* Payment Select */
+        .payment-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .payment-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .payment-item input {
+            accent-color: #2563eb;
+        }
+
+        /* Bottom Sticky Bar */
+        .checkout-bar {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            max-width: 480px;
+            background-color: #ffffff;
+            border-top: 1px solid #f1f5f9;
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 -4px 12px rgba(0,0,0,0.03);
+            z-index: 20;
+        }
+
+        .total-label {
+            font-size: 12px;
+            color: #64748b;
+        }
+
+        .total-price {
+            font-size: 18px;
+            font-weight: 800;
+            color: #0f172a;
+        }
+
+        .btn-submit {
+            background-color: #2563eb;
+            color: #ffffff;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+        }
+    </style>
 </head>
-<body oncontextmenu="return false;">
+<body>
 
-  <div class="container">
-    
-    <!-- LAYER 1: FORM PEMBELIAN ONLINE -->
-    <div id="layer-1" class="card">
-      <h2>⚡ BELI ONLINE ARDAF STORE</h2>
-      <p class="subtitle">Isi ulang pulsa & paket data instan, cepat, dan terpercaya.</p>
+<div class="mobile-container">
+    <header>
+        <div class="logo">PulsaKu</div>
+    </header>
 
-      <div class="form-group">
-        <label>Nomor HP Pelanggan</label>
-        <div class="input-with-btn">
-          <input type="tel" id="nomor-hp" placeholder="08xxx" maxlength="14" autocomplete="off">
-          <button type="button" class="btn-sec" id="btn-foto">📷 FOTO NOMOR</button>
+    <div class="timeline">
+        <!-- Step 1 -->
+        <div class="step-item active">
+            <div class="step-node">1</div>
+            <div class="step-content">
+                <div class="step-title">Masukkan Nomor Tujuan</div>
+                <div class="input-box">
+                    <input type="tel" class="input-field" value="081234567890">
+                    <span class="operator-badge">Telkomsel</span>
+                </div>
+            </div>
         </div>
-      </div>
 
-      <div class="form-group">
-        <label>Pilih Paket</label>
-        <select id="select-paket">
-          <option value="">-- Memuat Paket... --</option>
-        </select>
-        <input type="text" id="paket-manual" class="hidden" placeholder="Ketik jenis paket/layanan lain...">
-        <button type="button" class="btn-toggle" id="btn-toggle-paket">✏️ Paket Lain / Manual</button>
-      </div>
-
-      <button id="btn-beli" class="btn-primary">BELI SEKARANG</button>
-    </div>
-
-    <!-- LAYER 2: PROSES STATUS -->
-    <div id="layer-2" class="card hidden text-center">
-      <div class="spinner"></div>
-      <h3>MEMPROSES PESANAN...</h3>
-      <p>Mohon tunggu sebentar, sistem sedang memverifikasi transaksi Anda.</p>
-    </div>
-
-    <!-- LAYER 3: STRUK TRANSACTION -->
-    <div id="layer-3" class="card hidden text-center">
-      <div class="badge-success">✓ BERHASIL</div>
-      <h3>STRUK TRANSAKSI</h3>
-      <div class="struk-box">
-        <p><strong>ID Transaksi:</strong> <span id="struk-id">-</span></p>
-        <p><strong>Nomor HP:</strong> <span id="struk-nomor">-</span></p>
-        <p><strong>Paket Data:</strong> <span id="struk-paket">-</span></p>
-        <p><strong>Status:</strong> <span class="text-green">SUKSES</span></p>
-      </div>
-      <button id="btn-reset" class="btn-primary">Selesai / Transaksi Baru</button>
-    </div>
-
-    <!-- SECTION LAPORAN HARI INI -->
-    <div class="card margin-top">
-      <div class="header-laporan">
-        <h3>🔥 Laporan Hari Ini <span class="badge-live">LIVE</span></h3>
-      </div>
-
-      <!-- FORM CATAT TRANSAKSI MANUAL (KASIR) -->
-      <div class="kasir-box">
-        <h4>Catat Transaksi Konter (Kasir)</h4>
-        <div class="form-grid">
-          <div class="form-group">
-            <input type="text" id="kasir-id" placeholder="Nomor / ID Pelanggan">
-            <button type="button" id="btn-toggle-kasir-mode" class="btn-mini">Mode: Teks</button>
-          </div>
-          <div class="form-group">
-            <select id="kasir-tipe">
-              <option value="PULSA">PULSA</option>
-              <option value="PAKETDATA">PAKETDATA</option>
-              <option value="LISTRIK">LISTRIK</option>
-              <option value="PDAM">PDAM</option>
-              <option value="GAME">GAME</option>
-              <option value="TOPUP">TOPUP</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <select id="kasir-status">
-              <option value="Selesai">Selesai</option>
-              <option value="Pending">Pending</option>
-            </select>
-          </div>
+        <!-- Step 2 -->
+        <div class="step-item active">
+            <div class="step-node">2</div>
+            <div class="step-content">
+                <div class="step-title">Pilih Nominal Pulsa</div>
+                <div class="nominal-grid">
+                    <div class="card-option">
+                        <div class="option-val">10.000</div>
+                        <div class="option-price">Rp 11.200</div>
+                    </div>
+                    <div class="card-option selected">
+                        <div class="option-val">25.000</div>
+                        <div class="option-price">Rp 25.500</div>
+                    </div>
+                    <div class="card-option">
+                        <div class="option-val">50.000</div>
+                        <div class="option-price">Rp 50.100</div>
+                    </div>
+                    <div class="card-option">
+                        <div class="option-val">100.000</div>
+                        <div class="option-price">Rp 98.500</div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <button id="btn-simpan-kasir" class="btn-sec full-width">⚡ SIMPAN</button>
-      </div>
 
-      <!-- TABEL LAPORAN -->
-      <div class="table-responsive">
-        <table>
-          <thead>
-            <tr>
-              <th id="th-nomor" title="Double Click untuk Mode Admin">NOMOR</th>
-              <th>TIPE</th>
-              <th>STATUS</th>
-              <th id="th-tagih" class="hidden">TAGIH</th>
-            </tr>
-          </thead>
-          <tbody id="tbody-laporan">
-            <tr><td colspan="4" class="text-center">Memuat data...</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="pagination-box">
-        <button id="btn-prev" class="btn-mini">◀ Sebelumnya</button>
-        <button id="btn-next" class="btn-mini">Berikutnya ▶</button>
-      </div>
+        <!-- Step 3 -->
+        <div class="step-item active">
+            <div class="step-node">3</div>
+            <div class="step-content">
+                <div class="step-title">Metode Pembayaran</div>
+                <div class="payment-list">
+                    <label class="payment-item">
+                        <span>QRIS / E-Wallet</span>
+                        <input type="radio" name="pay" checked>
+                    </label>
+                    <label class="payment-item">
+                        <span>Transfer BCA</span>
+                        <input type="radio" name="pay">
+                    </label>
+                </div>
+            </div>
+        </div>
     </div>
 
-  </div>
-
-  <!-- MODAL CAMERA OCR -->
-  <div id="modal-camera" class="modal hidden">
-    <div class="modal-content">
-      <h3>Scan Nomor HP</h3>
-      <div class="camera-box">
-        <video id="webcam" autoplay playsinline></video>
-        <div class="bounding-box"></div>
-      </div>
-      <canvas id="ocr-canvas" class="hidden"></canvas>
-      <div class="modal-actions">
-        <button id="btn-capture" class="btn-primary">AMBIL FOTO</button>
-        <button id="btn-close-cam" class="btn-sec">BATAL</button>
-      </div>
+    <div class="checkout-bar">
+        <div>
+            <div class="total-label">Total Harga</div>
+            <div class="total-price">Rp 25.500</div>
+        </div>
+        <button class="btn-submit">Bayar Sekarang</button>
     </div>
-  </div>
+</div>
 
-  <!-- MODAL SELEKSI NOMOR -->
-  <div id="modal-select-nomor" class="modal hidden">
-    <div class="modal-content">
-      <h3>Pilih Nomor HP Terdeteksi</h3>
-      <div id="list-nomor-select" class="number-list"></div>
-      <button id="btn-close-select" class="btn-sec margin-top">Batal</button>
-    </div>
-  </div>
-
-  <script src="js/app.js"></script>
 </body>
 </html>
