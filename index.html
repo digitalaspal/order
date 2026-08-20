@@ -185,21 +185,6 @@
       overflow-x: hidden;
     }
 
-    /* --- TOP HEADER --- */
-    header.top-header {
-      padding: 20px 32px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: transparent;
-    }
-
-    .user-profile {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
     .btn-action-primary {
       background-color: var(--primary);
       color: white;
@@ -216,17 +201,6 @@
     .btn-action-primary:hover {
       background-color: var(--primary-hover);
       transform: translateY(-1px);
-    }
-
-    .avatar {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: #ffd6e0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
     }
 
     /* --- CONTENT PANELS --- */
@@ -553,15 +527,6 @@
 
   <!-- MAIN WRAPPER -->
   <div class="main-wrapper">
-
-    <!-- TOP HEADER -->
-    <header class="top-header">
-
-      <div class="user-profile">
-        <button class="btn-action-primary" onclick="switchTab('order', document.querySelectorAll('.tab-btn')[0])">+ New Order</button>
-        <div class="avatar">👤</div>
-      </div>
-    </header>
 
     <!-- CONTENT CONTAINER -->
     <main class="content-container">
