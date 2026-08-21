@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web Order Pulsa - Timeline Style</title>
+    <title>ARDAF STORE</title>
     <style>
         * {
             box-sizing: border-box;
@@ -29,12 +29,9 @@
         }
 
         header {
-            padding: 20px;
+            padding: 16px 20px;
             background: #ffffff;
             border-bottom: 1px solid #f1f5f9;
-            position: sticky;
-            top: 0;
-            z-index: 10;
         }
 
         .logo {
@@ -44,68 +41,125 @@
             letter-spacing: -0.5px;
         }
 
-        /* Container Timeline */
-        .timeline {
-            position: relative;
+        /* Navigasi Tab Utama */
+        .nav-tabs {
+            display: flex;
+            background: #ffffff;
+            border-bottom: 2px solid #f1f5f9;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 14px 0;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 700;
+            color: #64748b;
+            background: none;
+            border: none;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+            cursor: pointer;
+        }
+
+        .tab-btn.active {
+            color: #2563eb;
+            border-bottom-color: #2563eb;
+        }
+
+        /* Konten Tab */
+        .tab-content {
+            display: none;
             padding: 24px 20px;
         }
 
-        /* Garis Timeline Vertikal */
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Keyframes Animasi Timeline */
+        @keyframes fadeInTimeline {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes growLine {
+            from {
+                height: 0%;
+            }
+            to {
+                height: 100%;
+            }
+        }
+
+        /* Timeline Layout */
+        .timeline {
+            position: relative;
+        }
+
         .timeline::before {
             content: '';
             position: absolute;
-            top: 40px;
-            left: 35px;
-            bottom: 40px;
+            top: 15px;
+            left: 15px;
+            bottom: 15px;
             width: 2px;
-            background: #e2e8f0;
+            background: #2563eb;
             z-index: 1;
+            animation: growLine 0.5s ease-in-out forwards;
         }
 
-        .step-item {
+        .timeline-item {
             position: relative;
             display: flex;
             gap: 16px;
-            margin-bottom: 28px;
+            margin-bottom: 24px;
             z-index: 2;
+            animation: fadeInTimeline 0.4s ease-out forwards;
         }
 
-        .step-node {
+        /* Delay per item */
+        .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.2s; }
+        .timeline-item:nth-child(3) { animation-delay: 0.3s; }
+
+        .timeline-node {
             width: 32px;
             height: 32px;
             border-radius: 50%;
-            background-color: #ffffff;
-            border: 2px solid #cbd5e1;
-            color: #64748b;
-            font-size: 14px;
+            background-color: #2563eb;
+            color: #ffffff;
+            font-size: 13px;
             font-weight: 700;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
-            transition: all 0.2s;
-        }
-
-        .step-item.active .step-node {
-            background-color: #2563eb;
-            border-color: #2563eb;
-            color: #ffffff;
             box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
         }
 
-        .step-content {
+        .timeline-body {
             flex: 1;
             padding-top: 4px;
         }
 
-        .step-title {
-            font-size: 15px;
+        .timeline-title {
+            font-size: 14px;
             font-weight: 700;
             color: #1e293b;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
-        /* Component Inputs */
+        /* Inputs & Card Style */
         .input-box {
             position: relative;
         }
@@ -113,16 +167,11 @@
         .input-field {
             width: 100%;
             padding: 12px 14px;
-            font-size: 15px;
+            font-size: 14px;
             border: 1.5px solid #e2e8f0;
             border-radius: 10px;
             outline: none;
             background: #f8fafc;
-        }
-
-        .input-field:focus {
-            border-color: #2563eb;
-            background: #fff;
         }
 
         .operator-badge {
@@ -138,45 +187,53 @@
             border-radius: 6px;
         }
 
-        /* Option Grids */
-        .nominal-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
+        .sub-timeline {
+            position: relative;
+            display: flex;
+            flex-direction: column;
             gap: 10px;
         }
 
-        .card-option {
+        .card-timeline {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #ffffff;
             border: 1.5px solid #e2e8f0;
             border-radius: 10px;
-            padding: 12px;
+            padding: 10px 14px;
             cursor: pointer;
-            background: #fff;
-            transition: all 0.2s;
         }
 
-        .card-option.selected {
+        .card-timeline.selected {
             border-color: #2563eb;
-            background-color: #eff6ff;
+            background-color: #f8fafc;
         }
 
-        .option-val {
-            font-size: 16px;
-            font-weight: 700;
-            color: #0f172a;
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #2563eb;
+            flex-shrink: 0;
         }
 
-        .option-price {
-            font-size: 12px;
-            color: #64748b;
-            margin-top: 2px;
-        }
-
-        /* Payment Select */
-        .payment-list {
+        .card-info {
+            flex: 1;
             display: flex;
-            flex-direction: column;
-            gap: 8px;
+            justify-content: space-between;
+            align-items: center;
         }
+
+        .badge-status {
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .status-success { background: #dcfce7; color: #166534; }
+        .status-ready { background: #dbeafe; color: #1e40af; }
 
         .payment-item {
             display: flex;
@@ -186,14 +243,9 @@
             border: 1px solid #e2e8f0;
             border-radius: 8px;
             font-size: 14px;
-            font-weight: 500;
         }
 
-        .payment-item input {
-            accent-color: #2563eb;
-        }
-
-        /* Bottom Sticky Bar */
+        /* Bottom Checkout Bar */
         .checkout-bar {
             position: fixed;
             bottom: 0;
@@ -207,17 +259,6 @@
             align-items: center;
             box-shadow: 0 -4px 12px rgba(0,0,0,0.03);
             z-index: 20;
-        }
-
-        .total-label {
-            font-size: 12px;
-            color: #64748b;
-        }
-
-        .total-price {
-            font-size: 18px;
-            font-weight: 800;
-            color: #0f172a;
         }
 
         .btn-submit {
@@ -236,75 +277,178 @@
 
 <div class="mobile-container">
     <header>
-        <div class="logo">PulsaKu</div>
+        <div class="logo">ARDAF-STORE</div>
     </header>
 
-    <div class="timeline">
-        <!-- Step 1 -->
-        <div class="step-item active">
-            <div class="step-node">1</div>
-            <div class="step-content">
-                <div class="step-title">Masukkan Nomor Tujuan</div>
-                <div class="input-box">
-                    <input type="tel" class="input-field" value="081234567890">
-                    <span class="operator-badge">Telkomsel</span>
-                </div>
-            </div>
-        </div>
+    <!-- Header Navigasi Tab -->
+    <div class="nav-tabs">
+        <button class="tab-btn active" onclick="openTab(event, 'tab-beli')">BELI</button>
+        <button class="tab-btn" onclick="openTab(event, 'tab-paket')">PAKET</button>
+        <button class="tab-btn" onclick="openTab(event, 'tab-transaksi')">TRANSAKSI</button>
+        <button class="tab-btn" onclick="openTab(event, 'tab-stok')">STOK</button>
+    </div>
 
-        <!-- Step 2 -->
-        <div class="step-item active">
-            <div class="step-node">2</div>
-            <div class="step-content">
-                <div class="step-title">Pilih Nominal Pulsa</div>
-                <div class="nominal-grid">
-                    <div class="card-option">
-                        <div class="option-val">10.000</div>
-                        <div class="option-price">Rp 11.200</div>
-                    </div>
-                    <div class="card-option selected">
-                        <div class="option-val">25.000</div>
-                        <div class="option-price">Rp 25.500</div>
-                    </div>
-                    <div class="card-option">
-                        <div class="option-val">50.000</div>
-                        <div class="option-price">Rp 50.100</div>
-                    </div>
-                    <div class="card-option">
-                        <div class="option-val">100.000</div>
-                        <div class="option-price">Rp 98.500</div>
+    <!-- TAB 1: BELI -->
+    <div id="tab-beli" class="tab-content active">
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-node">1</div>
+                <div class="timeline-body">
+                    <div class="timeline-title">Nomor Tujuan</div>
+                    <div class="input-box">
+                        <input type="tel" class="input-field" value="081234567890">
+                        <span class="operator-badge">Telkomsel</span>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Step 3 -->
-        <div class="step-item active">
-            <div class="step-node">3</div>
-            <div class="step-content">
-                <div class="step-title">Metode Pembayaran</div>
-                <div class="payment-list">
-                    <label class="payment-item">
+            <div class="timeline-item">
+                <div class="timeline-node">2</div>
+                <div class="timeline-body">
+                    <div class="timeline-title">Pilih Nominal</div>
+                    <div class="sub-timeline">
+                        <div class="card-timeline">
+                            <div class="dot"></div>
+                            <div class="card-info">
+                                <span style="font-weight: 700;">Pulsa 10.000</span>
+                                <span style="color: #2563eb; font-weight: 700;">Rp 11.200</span>
+                            </div>
+                        </div>
+                        <div class="card-timeline selected">
+                            <div class="dot"></div>
+                            <div class="card-info">
+                                <span style="font-weight: 700;">Pulsa 25.000</span>
+                                <span style="color: #2563eb; font-weight: 700;">Rp 25.500</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-node">3</div>
+                <div class="timeline-body">
+                    <div class="timeline-title">Pembayaran</div>
+                    <div class="payment-item">
                         <span>QRIS / E-Wallet</span>
                         <input type="radio" name="pay" checked>
-                    </label>
-                    <label class="payment-item">
-                        <span>Transfer BCA</span>
-                        <input type="radio" name="pay">
-                    </label>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="checkout-bar">
+    <!-- TAB 2: PAKET -->
+    <div id="tab-paket" class="tab-content">
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-node">TEL</div>
+                <div class="timeline-body">
+                    <div class="timeline-title">Telkomsel Data</div>
+                    <div class="sub-timeline">
+                        <div class="card-timeline">
+                            <div class="dot"></div>
+                            <div class="card-info">
+                                <div>
+                                    <div style="font-weight: 700;">Combo Sakti 10GB</div>
+                                    <div style="font-size: 11px; color: #64748b;">30 Hari</div>
+                                </div>
+                                <span style="color: #2563eb; font-weight: 700;">Rp 35.000</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 3: TRANSAKSI -->
+    <div id="tab-transaksi" class="tab-content">
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-node">✓</div>
+                <div class="timeline-body">
+                    <div style="font-size: 12px; color: #64748b; margin-bottom: 4px;">21 Ags 2026 - 10:15</div>
+                    <div class="card-timeline">
+                        <div class="card-info">
+                            <div>
+                                <div style="font-weight: 700;">081234567890</div>
+                                <div style="font-size: 12px; color: #64748b;">Pulsa 25.000</div>
+                            </div>
+                            <span class="badge-status status-success">BERHASIL</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 4: STOK -->
+    <div id="tab-stok" class="tab-content">
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-node">S</div>
+                <div class="timeline-body">
+                    <div class="timeline-title">Status Server</div>
+                    <div class="sub-timeline">
+                        <div class="card-timeline">
+                            <div class="dot"></div>
+                            <div class="card-info">
+                                <span style="font-weight: 700;">Telkomsel Reguler</span>
+                                <span class="badge-status status-ready">TERSEDIA</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Checkout Bar -->
+    <div class="checkout-bar" id="checkout-bar">
         <div>
-            <div class="total-label">Total Harga</div>
-            <div class="total-price">Rp 25.500</div>
+            <div style="font-size: 11px; color: #64748b;">Total Harga</div>
+            <div style="font-size: 18px; font-weight: 800; color: #0f172a;">Rp 25.500</div>
         </div>
         <button class="btn-submit">Bayar Sekarang</button>
     </div>
 </div>
+
+<script>
+    function openTab(evt, tabName) {
+        var i, tabcontent, tablinks;
+
+        tabcontent = document.getElementsByClassName("tab-content");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].classList.remove("active");
+        }
+
+        tablinks = document.getElementsByClassName("tab-btn");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].classList.remove("active");
+        }
+
+        var activeTab = document.getElementById(tabName);
+        activeTab.classList.add("active");
+        evt.currentTarget.classList.add("active");
+
+        // Refresh animasi CSS
+        var timeline = activeTab.querySelector('.timeline');
+        if (timeline) {
+            timeline.style.animation = 'none';
+            timeline.offsetHeight;
+            timeline.style.animation = null;
+        }
+
+        // Tampilkan/sembunyikan checkout bar
+        var checkoutBar = document.getElementById("checkout-bar");
+        if (tabName === 'tab-beli') {
+            checkoutBar.style.display = "flex";
+        } else {
+            checkoutBar.style.display = "none";
+        }
+    }
+</script>
 
 </body>
 </html>
