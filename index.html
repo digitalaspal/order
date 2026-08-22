@@ -545,11 +545,11 @@
         }, 50);
     }
 }
-
+const URL = "https://script.google.com/macros/s/AKfycbyl1Pgf1jr1gJ5_mx6BMxjkhoq4xUM6pO4TtAzorekph7T_xqe7UPLwt84l2gpwY6Eo/exec";
     //databuyer
     async function tampilkanTransaksi(){
     try{
-        const response=await fetch(`${https://script.google.com/macros/s/AKfycbyl1Pgf1jr1gJ5_mx6BMxjkhoq4xUM6pO4TtAzorekph7T_xqe7UPLwt84l2gpwY6Eo/exec}?action=getPembeli&start=0&limit=20&pin=${PIN}`);
+        const response=await fetch(`${URL}?action=getPembeli&start=0&limit=20`);
         const data=await response.json();
         const timeline=document.getElementById("timeline-transaksi");
         timeline.innerHTML="";
