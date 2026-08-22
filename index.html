@@ -452,25 +452,9 @@
     </div>
 
     <!-- TAB 3: TRANSAKSI -->
-    <div id="tab-transaksi" class="tab-content">
-        <div class="timeline">
-            <div class="timeline-item">
-                <div class="timeline-node">✓</div>
-                <div class="timeline-body">
-                    <div style="font-size: 12px; color: #64748b; margin-bottom: 4px;">21 Ags 2026 - 10:15</div>
-                    <div class="card-timeline">
-                        <div class="card-info">
-                            <div>
-                                <div style="font-weight: 700;">081234567890</div>
-                                <div style="font-size: 12px; color: #64748b;">Pulsa 25.000</div>
-                            </div>
-                            <span class="badge-status status-success">BERHASIL</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div id="tab-transaksi" class="tab-content active">
+    <div id="timeline-transaksi" class="timeline"></div>
+</div>
 
     <!-- TAB 4: STOK -->
     <div id="tab-stok" class="tab-content">
@@ -561,6 +545,50 @@
         }, 50);
     }
 }
+
+    //databuyer
+    async function tampilkanTransaksi(){
+    try{
+        const response=await fetch(`${https://script.google.com/macros/s/AKfycbyl1Pgf1jr1gJ5_mx6BMxjkhoq4xUM6pO4TtAzorekph7T_xqe7UPLwt84l2gpwY6Eo/exec}?action=getPembeli&start=0&limit=20&pin=${PIN}`);
+        const data=await response.json();
+        const timeline=document.getElementById("timeline-transaksi");
+        timeline.innerHTML="";
+
+        data.forEach(transaksi=>{
+            const item=document.createElement("div");
+            item.className="timeline-item";
+
+            const tanggal=(transaksi.q||"").replace(/^\d+\.\s*/,"");
+            const status=(transaksi.status||"").toUpperCase();
+
+            let statusClass="";
+            if(status==="BERHASIL") statusClass="status-success";
+            else if(status==="PENDING") statusClass="status-pending";
+            else if(status==="GAGAL") statusClass="status-failed";
+
+            item.innerHTML=`
+                <div class="timeline-node">✓</div>
+                <div class="timeline-body">
+                    <div style="font-size:12px;color:#64748b;margin-bottom:4px;">${tanggal}</div>
+                    <div class="card-timeline">
+                        <div class="card-info">
+                            <div>
+                                <div style="font-weight:700;">${transaksi.t}</div>
+                                <div style="font-size:12px;color:#64748b;">${transaksi.v}</div>
+                            </div>
+                            <span class="badge-status ${statusClass}">${status}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            timeline.appendChild(item);
+        });
+    }catch(error){
+        console.error("Gagal mengambil transaksi:",error);
+    }
+}
+
+tampilkanTransaksi();
 </script>
 
 </body>
