@@ -545,18 +545,13 @@
         }, 50);
     }
 }
-const URL = "https://script.google.com/macros/s/AKfycbyl1Pgf1jr1gJ5_mx6BMxjkhoq4xUM6pO4TtAzorekph7T_xqe7UPLwt84l2gpwY6Eo/exec";
+const URL="https://script.google.com/macros/s/AKfycbyl1Pgf1jr1gJ5_mx6BMxjkhoq4xUM6pO4TtAzorekph7T_xqe7UPLwt84l2gpwY6Eo/exec";
     //databuyer
     async function tampilkanTransaksi(){
     try{
         const response=await fetch(`${URL}?action=getPembeli&start=0&limit=20`);
         const data=await response.json();
         const timeline=document.getElementById("timeline-transaksi");
-        const hasil=await response.json();
-        console.log("HASIL API:",hasil);
-        console.log("TIPE:",typeof hasil);
-        console.log("ARRAY:",Array.isArray(hasil));
-        
         timeline.innerHTML="";
 
         data.forEach(transaksi=>{
