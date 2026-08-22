@@ -552,7 +552,8 @@ const URL = "https://script.google.com/macros/s/AKfycbyl1Pgf1jr1gJ5_mx6BMxjkhoq4
         const response=await fetch(`${URL}?action=getPembeli&start=0&limit=20`);
         const data=await response.json();
         const timeline=document.getElementById("timeline-transaksi");
-console.log("HASIL API:",hasil);
+        const hasil=await response.json();
+        console.log("HASIL API:",hasil);
         console.log("TIPE:",typeof hasil);
         console.log("ARRAY:",Array.isArray(hasil));
         
