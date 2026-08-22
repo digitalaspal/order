@@ -540,6 +540,23 @@
     function triggerAIScan() {
     alert("Membuka Kamera AI: Silakan arahkan ke nomor telepon untuk memindai otomatis.");
 }
+    function toggleCustomPackage() {
+    var packageList = document.getElementById("package-list");
+    var customInput = document.getElementById("custom-package-input");
+    var btnText = document.getElementById("btn-pkg-text");
+
+    if (packageList.style.display === "none") {
+        // Tampilkan daftar pilihan paket & sembunyikan input manual
+        packageList.style.display = "flex";
+        customInput.style.display = "none";
+        btnText.innerText = "Tulis Paket";
+    } else {
+        // Sembunyikan daftar pilihan paket & tampilkan input manual
+        packageList.style.display = "none";
+        customInput.style.display = "block";
+        btnText.innerText = "Pilih List Paket";
+    }
+}
 </script>
 
 </body>
