@@ -545,7 +545,7 @@
         }, 50);
     }
 }
-const URL="https://script.google.com/macros/s/AKfycbyl1Pgf1jr1gJ5_mx6BMxjkhoq4xUM6pO4TtAzorekph7T_xqe7UPLwt84l2gpwY6Eo/exec";
+const URL="https://orderan.digitalaspal.workers.dev";
     //databuyer
     async function tampilkanTransaksi(){
     try{
@@ -555,36 +555,36 @@ const URL="https://script.google.com/macros/s/AKfycbyl1Pgf1jr1gJ5_mx6BMxjkhoq4xU
 
         timeline.innerHTML="";
 
-        data.pembeli.forEach(transaksi=>{
-            const item=document.createElement("div");
-            item.className="timeline-item";
+        data.pembeli.forEach((transaksi,index)=>{
+    const item=document.createElement("div");
+    item.className="timeline-item";
 
-            const tanggal=(transaksi.q||"").replace(/^\d+\.\s*/,"");
-            const status=(transaksi.status||"").toUpperCase();
+    const tanggal=(transaksi.q||"").replace(/^\d+\.\s*/,"");
+    const status=(transaksi.status||"").toUpperCase();
 
-            let statusClass="";
-            if(status==="BERHASIL")statusClass="status-success";
-            else if(status==="PENDING")statusClass="status-pending";
-            else if(status==="GAGAL")statusClass="status-failed";
+    let statusClass="";
+    if(status==="BERHASIL")statusClass="status-success";
+    else if(status==="PENDING")statusClass="status-pending";
+    else if(status==="GAGAL")statusClass="status-failed";
 
-            item.innerHTML=`
-                <div class="timeline-node">✓</div>
-                <div class="timeline-body">
-                    <div style="font-size:12px;color:#64748b;margin-bottom:4px;">${tanggal}</div>
-                    <div class="card-timeline">
-                        <div class="card-info">
-                            <div>
-                                <div style="font-weight:700;">${transaksi.t}</div>
-                                <div style="font-size:12px;color:#64748b;">${transaksi.v}</div>
-                            </div>
-                            <span class="badge-status ${statusClass}">${status}</span>
-                        </div>
+    item.innerHTML=`
+        <div class="timeline-node">${index+1}</div>
+        <div class="timeline-body">
+            <div style="font-size:12px;color:#64748b;margin-bottom:4px;">${tanggal}</div>
+            <div class="card-timeline">
+                <div class="card-info">
+                    <div>
+                        <div style="font-weight:700;">${transaksi.t}</div>
+                        <div style="font-size:12px;color:#64748b;">${transaksi.v}</div>
                     </div>
+                    <span class="badge-status ${statusClass}">${status}</span>
                 </div>
-            `;
+            </div>
+        </div>
+    `;
 
-            timeline.appendChild(item);
-        });
+    timeline.appendChild(item);
+});
     }catch(error){
         console.error("Gagal mengambil transaksi:",error);
     }
