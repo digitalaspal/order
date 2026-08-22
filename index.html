@@ -271,6 +271,46 @@
             font-size: 14px;
             cursor: pointer;
         }
+        /* Wrapper header step agar judul & tombol sejajar */
+.timeline-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.timeline-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+/* Tombol Pindai AI */
+.btn-ai-scan {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: linear-gradient(135deg, #eff6ff, #dbeafe);
+    color: #1d4ed8;
+    border: 1px solid #bfdbfe;
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-ai-scan:hover {
+    background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+    transform: translateY(-1px);
+}
+
+.btn-ai-scan svg {
+    width: 14px;
+    height: 14px;
+    fill: currentColor;
+}
     </style>
 </head>
 <body>
@@ -294,9 +334,18 @@
             <div class="timeline-item">
                 <div class="timeline-node">1</div>
                 <div class="timeline-body">
-                    <div class="timeline-title">Nomor Tujuan</div>
+                    <div class="timeline-header">
+    <div class="timeline-title">Nomor Tujuan</div>
+    <button class="btn-ai-scan" type="button" onclick="triggerAIScan()">
+        <svg viewBox="0 0 24 24">
+            <path d="M12 15a3 3 0 100-6 3 3 0 000 6z"/>
+            <path d="M9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/>
+        </svg>
+        <span>Pindai AI</span>
+    </button>
+</div>
                     <div class="input-box">
-                        <input type="tel" class="input-field" value="081234567890">
+                        <input type="tel" class="input-field" placeholder="081234567890">
                         <span class="operator-badge">Telkomsel</span>
                     </div>
                 </div>
@@ -448,6 +497,9 @@
             checkoutBar.style.display = "none";
         }
     }
+    function triggerAIScan() {
+    alert("Membuka Kamera AI: Silakan arahkan ke nomor telepon untuk memindai otomatis.");
+}
 </script>
 
 </body>
