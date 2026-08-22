@@ -409,7 +409,7 @@
 
 <!-- Form Input Manual (Awalnya tersembunyi) -->
 <div class="input-box" id="custom-package-input" style="display: none;">
-    <input type="text" class="input-field" placeholder="Ketik kode/nama paket manual...">
+    <input type="text" id="input-paket-manual" class="input-field" placeholder="Ketik kode/nama paket manual...">
 </div>
                 </div>
             </div>
@@ -544,17 +544,21 @@
     var packageList = document.getElementById("package-list");
     var customInput = document.getElementById("custom-package-input");
     var btnText = document.getElementById("btn-pkg-text");
+    var inputField = document.getElementById("input-paket-manual");
 
     if (packageList.style.display === "none") {
-        // Tampilkan daftar pilihan paket & sembunyikan input manual
         packageList.style.display = "flex";
         customInput.style.display = "none";
         btnText.innerText = "Tulis Paket";
     } else {
-        // Sembunyikan daftar pilihan paket & tampilkan input manual
         packageList.style.display = "none";
         customInput.style.display = "block";
         btnText.innerText = "Pilih List Paket";
+        
+        // Memaksa kursor & keyboard langsung aktif ke kolom input
+        setTimeout(function() {
+            inputField.focus();
+        }, 50);
     }
 }
 </script>
