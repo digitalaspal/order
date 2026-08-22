@@ -549,7 +549,7 @@ const URL="https://script.google.com/macros/s/AKfycbyl1Pgf1jr1gJ5_mx6BMxjkhoq4xU
     //databuyer
     async function tampilkanTransaksi(){
     try{
-        const response=await fetch(`${URL}?action=getPembeli&start=0&limit=20&pin=${PIN}`);
+        const response=await fetch(`${URL}?action=getPembeli&start=0&limit=20`);
         const text=await response.text();
         console.log("HASIL API:",text);
     }catch(error){
