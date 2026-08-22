@@ -498,24 +498,24 @@
 
     <!-- TAB 4: STOK -->
     <div id="tab-stok" class="tab-content">
-        <div class="timeline">
-            <div class="timeline-item">
-                <div class="timeline-node">S</div>
-                <div class="timeline-body">
-                    <div class="timeline-title">Status Server</div>
-                    <div class="sub-timeline">
-                        <div class="card-timeline">
-                            <div class="dot"></div>
-                            <div class="card-info">
-                                <span style="font-weight: 700;">Telkomsel Reguler</span>
-                                <span class="badge-status status-ready">TERSEDIA</span>
-                            </div>
+    <div class="timeline">
+        <div class="timeline-item">
+            <div class="timeline-node">S</div>
+            <div class="timeline-body">
+                <div class="timeline-title">STATUS STOK</div>
+                <div class="sub-timeline">
+                    <div class="card-timeline">
+                        <div class="dot"></div>
+                        <div class="card-info">
+                            <span style="font-weight:700;">STOK AKTIF</span>
+                            <span id="status-stok" class="badge-status status-ready">MEMUAT...</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
     <!-- Bottom Checkout Bar -->
     <div class="checkout-bar" id="checkout-bar">
@@ -528,6 +528,24 @@
 </div>
 
 <script>
+const URL="https://orderan.digitalaspal.workers.dev";
+    async function tampilkanStok(){
+    const status=document.getElementById("status-stok");
+
+    try{
+        const response=await fetch(`${URL}?action=getStok`);
+        const data=await response.json();
+
+        status.textContent=`${data.stok} STOK TERSEDIA`;
+        status.className="badge-status status-ready";
+    }catch(error){
+        status.textContent="GAGAL MEMUAT";
+        status.className="badge-status status-pending";
+        console.error("Gagal mengambil stok:",error);
+    }
+}
+
+tampilkanStok();
     function openTab(evt, tabName) {
         var i, tabcontent, tablinks;
 
@@ -585,7 +603,7 @@
         }, 50);
     }
 }
-const URL="https://orderan.digitalaspal.workers.dev";
+
     //databuyer
     async function tampilkanTransaksi(){
         const timeline=document.getElementById("timeline-transaksi");
