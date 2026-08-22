@@ -549,45 +549,13 @@ const URL="https://script.google.com/macros/s/AKfycbyl1Pgf1jr1gJ5_mx6BMxjkhoq4xU
     //databuyer
     async function tampilkanTransaksi(){
     try{
-        const response=await fetch(`${URL}?action=getPembeli&start=0&limit=20`);
-        const data=await response.json();
-        const timeline=document.getElementById("timeline-transaksi");
-        timeline.innerHTML="";
-
-        data.forEach(transaksi=>{
-            const item=document.createElement("div");
-            item.className="timeline-item";
-
-            const tanggal=(transaksi.q||"").replace(/^\d+\.\s*/,"");
-            const status=(transaksi.status||"").toUpperCase();
-
-            let statusClass="";
-            if(status==="BERHASIL") statusClass="status-success";
-            else if(status==="PENDING") statusClass="status-pending";
-            else if(status==="GAGAL") statusClass="status-failed";
-
-            item.innerHTML=`
-                <div class="timeline-node">✓</div>
-                <div class="timeline-body">
-                    <div style="font-size:12px;color:#64748b;margin-bottom:4px;">${tanggal}</div>
-                    <div class="card-timeline">
-                        <div class="card-info">
-                            <div>
-                                <div style="font-weight:700;">${transaksi.t}</div>
-                                <div style="font-size:12px;color:#64748b;">${transaksi.v}</div>
-                            </div>
-                            <span class="badge-status ${statusClass}">${status}</span>
-                        </div>
-                    </div>
-                </div>
-            `;
-            timeline.appendChild(item);
-        });
+        const response=await fetch(`${URL}?action=getPembeli&start=0&limit=20&pin=${PIN}`);
+        const text=await response.text();
+        console.log("HASIL API:",text);
     }catch(error){
         console.error("Gagal mengambil transaksi:",error);
     }
 }
-
 tampilkanTransaksi();
 </script>
 
