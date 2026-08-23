@@ -754,7 +754,7 @@ tampilkanTransaksi();
     `;
 
     try{
-        const response=await fetch(`${URL}?action=getPaket&kartu=${encodeURIComponent(kartu)}&pin=${PIN}`);
+        const response=await fetch(`${URL}?action=getPaket&kartu=${encodeURIComponent(kartu)}`);
         const data=await response.json();
 
         container.innerHTML="";
