@@ -377,6 +377,62 @@
     0%,80%,100%{transform:scale(.6);opacity:.4}
     40%{transform:scale(1);opacity:1}
 }
+        /* BUTTON PAKET */
+        .paket-buttons{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+    margin:15px 0;
+}
+
+.paket-buttons button{
+    position:relative;
+    padding:13px 8px;
+    border:1px solid #f59e0b;
+    border-radius:8px;
+    background:linear-gradient(145deg,#1e293b,#0f172a);
+    color:#fff;
+    font-size:14px;
+    font-weight:800;
+    letter-spacing:.5px;
+    cursor:pointer;
+    overflow:hidden;
+    box-shadow:0 4px 0 #7c2d12,0 6px 12px rgba(0,0,0,.3);
+    transition:.15s;
+}
+
+.paket-buttons button::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-100%;
+    width:70%;
+    height:100%;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);
+    transform:skewX(-20deg);
+    transition:.5s;
+}
+
+.paket-buttons button:hover::before{
+    left:130%;
+}
+
+.paket-buttons button:hover{
+    border-color:#fbbf24;
+    box-shadow:0 4px 0 #7c2d12,0 0 15px rgba(245,158,11,.45);
+    transform:translateY(-2px);
+}
+
+.paket-buttons button:active{
+    transform:translateY(3px);
+    box-shadow:0 1px 0 #7c2d12,0 0 8px rgba(245,158,11,.3);
+}
+
+@media(max-width:500px){
+    .paket-buttons{
+        grid-template-columns:repeat(3,1fr);
+    }
+}
     </style>
 </head>
 <body>
@@ -469,6 +525,17 @@
 
     <!-- TAB 2: PAKET -->
     <div id="tab-paket" class="tab-content">
+
+<div class="paket-buttons">
+    <button onclick="tampilkanPaket('XL2')">XL2</button>
+    <button onclick="tampilkanPaket('XL3')">XL3</button>
+    <button onclick="tampilkanPaket('XL4')">XL4</button>
+    <button onclick="tampilkanPaket('XLHARIAN')">XL HARIAN</button>
+    <button onclick="tampilkanPaket('IM3')">IM3</button>
+    <button onclick="tampilkanPaket('TRI')">TRI</button>
+    <button onclick="tampilkanPaket('SMART')">SMARTFREN</button>
+</div>
+<div id="daftar-paket"></div>        
         <div class="timeline">
             <div class="timeline-item">
                 <div class="timeline-node">TEL</div>
@@ -656,8 +723,35 @@ tampilkanStok();
         console.error("Gagal mengambil transaksi:",error);
     }
 }
-
 tampilkanTransaksi();
+
+    //DFTR PKET
+    async function tampilkanPaket(kartu){
+    try{
+        const response=await fetch(`${URL}?action=getPaket&kartu=${encodeURIComponent(kartu)}`);
+        const data=await response.json();
+
+        console.log("PAKET:",data);
+
+        const container=document.getElementById("daftar-paket");
+        container.innerHTML="";
+
+        data.paket.forEach(paket=>{
+            const item=document.createElement("div");
+            item.className="paket-item";
+
+            item.innerHTML=`
+                <span>${paket.kuota}</span>
+                <span>${paket.harga}</span>
+                <span>${paket.aktif}</span>
+            `;
+
+            container.appendChild(item);
+        });
+    }catch(error){
+        console.error("Gagal mengambil paket:",error);
+    }
+}
 </script>
 
 </body>
