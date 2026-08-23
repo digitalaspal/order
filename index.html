@@ -556,7 +556,7 @@
 <div class="paket-tabs">
     <button class="paket-tab" onclick="tampilkanPaket('XL2',this)">XL2</button>
     <button class="paket-tab" onclick="tampilkanPaket('XL3',this)">XL3</button>
-    <button class="paket-tab active" onclick="tampilkanPaket('XL4',this)">XL4</button>
+    <button id="tab-xl4" class="paket-tab active" onclick="tampilkanPaket('XL4',this)">XL4</button>
     <button class="paket-tab" onclick="tampilkanPaket('XLHARIAN',this)">XLHARIAN</button>
     <button class="paket-tab" onclick="tampilkanPaket('IM3',this)">IM3</button>
     <button class="paket-tab" onclick="tampilkanPaket('TRI',this)">TRI</button>
@@ -571,26 +571,7 @@
     </div>
 </div>
         
-        <div class="timeline">
-            <div class="timeline-item">
-                <div class="timeline-node">TEL</div>
-                <div class="timeline-body">
-                    <div class="timeline-title">Telkomsel Data</div>
-                    <div class="sub-timeline">
-                        <div class="card-timeline">
-                            <div class="dot"></div>
-                            <div class="card-info">
-                                <div>
-                                    <div style="font-weight: 700;">Combo Sakti 10GB</div>
-                                    <div style="font-size: 11px; color: #64748b;">30 Hari</div>
-                                </div>
-                                <span style="color: #2563eb; font-weight: 700;">Rp 35.000</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+       
     </div>
 
     <!-- TAB 3: TRANSAKSI -->
@@ -786,6 +767,8 @@ tampilkanTransaksi();
         const response=await fetch(`${URL}?action=getPaket&kartu=${encodeURIComponent(kartu)}`);
         const data=await response.json();
 
+        console.log("DATA PAKET:",data);
+
         container.innerHTML=`
             <div class="paket-header">
                 <span>KUOTA</span>
@@ -793,6 +776,15 @@ tampilkanTransaksi();
                 <span>MASA AKTIF</span>
             </div>
         `;
+
+        if(!data.paket||!data.paket.length){
+            container.innerHTML+=`
+                <div style="text-align:center;padding:20px;color:#64748b;">
+                    Tidak ada paket ${kartu}
+                </div>
+            `;
+            return;
+        }
 
         data.paket.forEach(paket=>{
             const item=document.createElement("div");
@@ -808,7 +800,16 @@ tampilkanTransaksi();
         });
     }catch(error){
         console.error("Gagal mengambil paket:",error);
+        container.innerHTML=`
+            <div style="text-align:center;padding:20px;color:#ef4444;">
+                Gagal memuat paket
+            </div>
+        `;
     }
+       window.addEventListener("DOMContentLoaded",()=>{
+    const tabXL4=document.getElementById("tab-xl4");
+    tampilkanPaket("XL4",tabXL4);
+});
 }
 </script>
 
