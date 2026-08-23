@@ -362,7 +362,7 @@
     background:#f59e0b;
 }
         /* DAFTAR HARGA */
-       #daftar-paket{
+    #daftar-paket{
     display:flex;
     flex-direction:column;
     gap:6px;
@@ -554,14 +554,15 @@
     <div id="tab-paket" class="tab-content">
 
 <div class="paket-tabs">
-    <button class="paket-tab active" onclick="tampilkanPaket('XL2',this)">XL2</button>
+    <button class="paket-tab" onclick="tampilkanPaket('XL2',this)">XL2</button>
     <button class="paket-tab" onclick="tampilkanPaket('XL3',this)">XL3</button>
-    <button class="paket-tab" onclick="tampilkanPaket('XL4',this)">XL4</button>
+    <button class="paket-tab active" onclick="tampilkanPaket('XL4',this)">XL4</button>
     <button class="paket-tab" onclick="tampilkanPaket('XLHARIAN',this)">XLHARIAN</button>
     <button class="paket-tab" onclick="tampilkanPaket('IM3',this)">IM3</button>
     <button class="paket-tab" onclick="tampilkanPaket('TRI',this)">TRI</button>
     <button class="paket-tab" onclick="tampilkanPaket('SMART',this)">SMART</button>
 </div>
+
 <div id="daftar-paket">
     <div class="paket-header">
         <span>KUOTA</span>
@@ -760,13 +761,18 @@ tampilkanStok();
 tampilkanTransaksi();
 
     //DFTR PKET
-    async function tampilkanPaket(kartu,button){
+   async function tampilkanPaket(kartu,button){
     document.querySelectorAll(".paket-tab").forEach(tab=>tab.classList.remove("active"));
     button.classList.add("active");
 
     const container=document.getElementById("daftar-paket");
 
     container.innerHTML=`
+        <div class="paket-header">
+            <span>KUOTA</span>
+            <span>HARGA</span>
+            <span>MASA AKTIF</span>
+        </div>
         <div class="loading-paket">
             <span></span>
             <span></span>
@@ -780,7 +786,13 @@ tampilkanTransaksi();
         const response=await fetch(`${URL}?action=getPaket&kartu=${encodeURIComponent(kartu)}`);
         const data=await response.json();
 
-        container.innerHTML="";
+        container.innerHTML=`
+            <div class="paket-header">
+                <span>KUOTA</span>
+                <span>HARGA</span>
+                <span>MASA AKTIF</span>
+            </div>
+        `;
 
         data.paket.forEach(paket=>{
             const item=document.createElement("div");
@@ -796,7 +808,6 @@ tampilkanTransaksi();
         });
     }catch(error){
         console.error("Gagal mengambil paket:",error);
-        container.innerHTML="Gagal memuat paket";
     }
 }
 </script>
