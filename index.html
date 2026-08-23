@@ -312,126 +312,54 @@
     fill: currentColor;
 }
         /* Tombol Tulis Paket */
-.btn-custom-pkg {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    background: #f1f5f9;
-    color: #475569;
-    border: 1px solid #cbd5e1;
-    padding: 3px 8px;
-    border-radius: 6px;
-    font-size: 11px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.btn-custom-pkg:hover {
-    background: #e2e8f0;
-    color: #1e293b;
-}
-
-.btn-custom-pkg svg {
-    width: 12px;
-    height: 12px;
-    fill: currentColor;
-}
-        .status-pending{
-    background:#fef3c7;
-    color:#92400e;
-    padding:4px 8px;
-    border-radius:6px;
-    font-size:11px;
-    font-weight:700;
-}
-
-.status-selesai{
-    background:#dcfce7;
-    color:#166534;
-    padding:4px 8px;
-    border-radius:6px;
-    font-size:11px;
-    font-weight:700;
-}
-        .loading-dots{
+.paket-tabs{
     display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:5px;
-    padding:20px;
+    gap:4px;
+    overflow-x:auto;
+    padding:4px;
+    margin-bottom:14px;
+    border-bottom:2px solid #e2e8f0;
+    scrollbar-width:none;
 }
 
-.loading-dots span{
-    width:7px;
-    height:7px;
-    background:#64748b;
-    border-radius:50%;
-    animation:loadingDot 1.2s infinite ease-in-out;
+.paket-tabs::-webkit-scrollbar{
+    display:none;
 }
 
-.loading-dots span:nth-child(2){animation-delay:.2s}
-.loading-dots span:nth-child(3){animation-delay:.4s}
-
-@keyframes loadingDot{
-    0%,80%,100%{transform:scale(.6);opacity:.4}
-    40%{transform:scale(1);opacity:1}
-}
-        /* BUTTON PAKET */
-        .paket-buttons{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:10px;
-    margin:15px 0;
-}
-
-.paket-buttons button{
+.paket-tab{
+    flex:0 0 auto;
     position:relative;
-    padding:13px 8px;
-    border:1px solid #f59e0b;
-    border-radius:8px;
-    background:linear-gradient(145deg,#1e293b,#0f172a);
-    color:#fff;
-    font-size:14px;
+    padding:10px 18px;
+    border:0;
+    border-radius:8px 8px 0 0;
+    background:#e2e8f0;
+    color:#475569;
+    font-size:13px;
     font-weight:800;
-    letter-spacing:.5px;
     cursor:pointer;
-    overflow:hidden;
-    box-shadow:0 4px 0 #7c2d12,0 6px 12px rgba(0,0,0,.3);
-    transition:.15s;
+    transition:.2s;
 }
 
-.paket-buttons button::before{
+.paket-tab:hover{
+    background:#cbd5e1;
+    color:#0f172a;
+}
+
+.paket-tab.active{
+    background:#f59e0b;
+    color:#fff;
+    box-shadow:0 3px 10px rgba(245,158,11,.25);
+}
+
+.paket-tab.active::after{
     content:"";
     position:absolute;
-    top:0;
-    left:-100%;
+    bottom:-6px;
+    left:15%;
     width:70%;
-    height:100%;
-    background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);
-    transform:skewX(-20deg);
-    transition:.5s;
-}
-
-.paket-buttons button:hover::before{
-    left:130%;
-}
-
-.paket-buttons button:hover{
-    border-color:#fbbf24;
-    box-shadow:0 4px 0 #7c2d12,0 0 15px rgba(245,158,11,.45);
-    transform:translateY(-2px);
-}
-
-.paket-buttons button:active{
-    transform:translateY(3px);
-    box-shadow:0 1px 0 #7c2d12,0 0 8px rgba(245,158,11,.3);
-}
-
-@media(max-width:500px){
-    .paket-buttons{
-        grid-template-columns:repeat(3,1fr);
-    }
+    height:4px;
+    border-radius:4px;
+    background:#f59e0b;
 }
         /* DAFTAR HARGA */
         #daftar-paket{
@@ -608,16 +536,17 @@
     <!-- TAB 2: PAKET -->
     <div id="tab-paket" class="tab-content">
 
-<div class="paket-buttons">
-    <button onclick="tampilkanPaket('XL2')">XL2</button>
-    <button onclick="tampilkanPaket('XL3')">XL3</button>
-    <button onclick="tampilkanPaket('XL4')">XL4</button>
-    <button onclick="tampilkanPaket('XLHARIAN')">XL HARIAN</button>
-    <button onclick="tampilkanPaket('IM3')">IM3</button>
-    <button onclick="tampilkanPaket('TRI')">TRI</button>
-    <button onclick="tampilkanPaket('SMART')">SMARTFREN</button>
+<div class="paket-tabs">
+    <button class="paket-tab active" onclick="tampilkanPaket('XL2',this)">XL2</button>
+    <button class="paket-tab" onclick="tampilkanPaket('XL3',this)">XL3</button>
+    <button class="paket-tab" onclick="tampilkanPaket('XL4',this)">XL4</button>
+    <button class="paket-tab" onclick="tampilkanPaket('XLHARIAN',this)">XLHARIAN</button>
+    <button class="paket-tab" onclick="tampilkanPaket('IM3',this)">IM3</button>
+    <button class="paket-tab" onclick="tampilkanPaket('TRI',this)">TRI</button>
+    <button class="paket-tab" onclick="tampilkanPaket('SMART',this)">SMART</button>
 </div>
-<div id="daftar-paket"></div>        
+<div id="daftar-paket"></div>
+        
         <div class="timeline">
             <div class="timeline-item">
                 <div class="timeline-node">TEL</div>
@@ -808,14 +737,26 @@ tampilkanStok();
 tampilkanTransaksi();
 
     //DFTR PKET
-    async function tampilkanPaket(kartu){
+    async function tampilkanPaket(kartu,button){
+    document.querySelectorAll(".paket-tab").forEach(tab=>tab.classList.remove("active"));
+    button.classList.add("active");
+
+    const container=document.getElementById("daftar-paket");
+
+    container.innerHTML=`
+        <div class="loading-paket">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    `;
+
     try{
-        const response=await fetch(`${URL}?action=getPaket&kartu=${encodeURIComponent(kartu)}`);
+        const response=await fetch(`${URL}?action=getPaket&kartu=${encodeURIComponent(kartu)}&pin=${PIN}`);
         const data=await response.json();
 
-        console.log("PAKET:",data);
-
-        const container=document.getElementById("daftar-paket");
         container.innerHTML="";
 
         data.paket.forEach(paket=>{
@@ -832,6 +773,7 @@ tampilkanTransaksi();
         });
     }catch(error){
         console.error("Gagal mengambil paket:",error);
+        container.innerHTML="Gagal memuat paket";
     }
 }
 </script>
