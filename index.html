@@ -362,43 +362,52 @@
     background:#f59e0b;
 }
         /* DAFTAR HARGA */
-        #daftar-paket{
+       #daftar-paket{
     display:flex;
     flex-direction:column;
-    gap:9px;
-    margin-top:15px;
+    gap:6px;
+    margin-top:14px;
+}
+
+.paket-header,
+.paket-item{
+    display:grid;
+    grid-template-columns:1.2fr 1fr 1fr;
+    align-items:center;
+    gap:8px;
+}
+
+.paket-header{
+    padding:9px 13px;
+    background:#e2e8f0;
+    border-radius:8px;
+    color:#475569;
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:.5px;
+}
+
+.paket-header span:nth-child(2),
+.paket-header span:nth-child(3){
+    text-align:center;
 }
 
 .paket-item{
     position:relative;
-    display:grid;
-    grid-template-columns:1.2fr 1fr .8fr;
-    align-items:center;
-    padding:13px 15px;
-    background:linear-gradient(135deg,#ffffff,#f1f5f9);
-    border:1px solid #cbd5e1;
+    padding:13px;
+    background:linear-gradient(135deg,#fff,#f8fafc);
+    border:1px solid #dbe3ec;
     border-left:4px solid #f59e0b;
-    border-radius:9px;
-    box-shadow:0 3px 8px rgba(15,23,42,.12);
+    border-radius:8px;
+    box-shadow:0 2px 6px rgba(15,23,42,.08);
+    transition:.2s;
     overflow:hidden;
-    transition:.18s;
-}
-
-.paket-item::after{
-    content:"";
-    position:absolute;
-    right:-25px;
-    top:-25px;
-    width:70px;
-    height:70px;
-    background:rgba(245,158,11,.08);
-    transform:rotate(45deg);
 }
 
 .paket-item:hover{
-    transform:translateX(4px);
+    transform:translateX(3px);
     border-color:#f59e0b;
-    box-shadow:0 5px 15px rgba(245,158,11,.2);
+    box-shadow:0 5px 14px rgba(245,158,11,.18);
 }
 
 .paket-item span{
@@ -407,36 +416,45 @@
 }
 
 .paket-item span:nth-child(1){
-    font-size:16px;
-    font-weight:800;
     color:#0f172a;
+    font-size:14px;
+    font-weight:800;
 }
 
 .paket-item span:nth-child(2){
-    font-size:15px;
-    font-weight:800;
     color:#ea580c;
+    font-size:14px;
+    font-weight:800;
     text-align:center;
 }
 
 .paket-item span:nth-child(3){
+    color:#475569;
     font-size:12px;
     font-weight:700;
-    color:#475569;
-    text-align:right;
+    text-align:center;
 }
 
 @media(max-width:500px){
+    .paket-header,
     .paket-item{
-        padding:12px;
+        grid-template-columns:1.1fr 1fr 1fr;
+    }
+
+    .paket-header{
+        font-size:10px;
+    }
+
+    .paket-item{
+        padding:11px 9px;
     }
 
     .paket-item span:nth-child(1){
-        font-size:14px;
+        font-size:13px;
     }
 
     .paket-item span:nth-child(2){
-        font-size:14px;
+        font-size:13px;
     }
 
     .paket-item span:nth-child(3){
@@ -545,7 +563,13 @@
     <button class="paket-tab" onclick="tampilkanPaket('TRI',this)">TRI</button>
     <button class="paket-tab" onclick="tampilkanPaket('SMART',this)">SMART</button>
 </div>
-<div id="daftar-paket"></div>
+<div id="daftar-paket">
+    <div class="paket-header">
+        <span>KUOTA</span>
+        <span>HARGA</span>
+        <span>MASA AKTIF</span>
+    </div>
+</div>
         
         <div class="timeline">
             <div class="timeline-item">
